@@ -3,7 +3,8 @@
 
 ## Descripción del Proyecto
 
-El proyecto se basa en un banco de juegos compuesto por 3 minijuegos diferentes, dentro de los cuales, cada uno se hará en base a los temas vistos en clases. Al momento de la elección del minijuego deseado por el usuario, éste podrá escoger el que desea realizar, por medio de un menú interactivo.
+El proyecto se basa en un banco de juegos compuesto por 3 minijuegos diferentes, dentro de los cuales, cada uno se hará en base a los temas vistos en clases. Al momento de la elección del minijuego deseado por el usuario, éste podrá escoger el que desea realizar, por medio de un menú interactivo. Cada partida es guardada en caso de que el jugador quiera seguir jugando o navegando.
+Cada minijuego es para dos jugadores, multijugador y contra CPU.
 
 Listado de minijuegos:
 
@@ -18,20 +19,18 @@ Listado de minijuegos:
 - If-else: Decidir el ganador de la partida.
 - String: Manejar los mensajes.
 
-**2. Conecta 4:**
-**Temática:** Dos jugadores se enfrentan en una cuadrícula de 9 columnas por 7 filas, el juego consiste en intentar alinear 4 fichas (horizontal, vertical), cada jugador tendrá su turno y ficha respectiva(O y X).
+**2. Juego de cartas 21:**
+**Temática:** Dos jugadores se enfrentan en un juego de cartas llamado 21, consiste en el primer jugador que consiga sumar 21 con la suma de cartas que se le irán brindando ganará el juego.
 
 **Conceptos clave:**
 - Switch case: Opciones del jugador antes de iniciar el minijuego
-- Char: Iniciar el tablero en una matriz
-- If - else: Se utilizará  para determinar qué jugador lanzará.
-- Ciclo for: se utilizará para recorrer y colocar la ficha en la celda vacía.
-- If-else: Verificar que hayan 4 fichas consecutivas ya sea de manera vertical o horizontal para verificar la victoria o empate en caso de que ningún jugador gane.
-- do-while: Se usará para darle la opción al jugador si desea volver a jugar una vez la partida haya terminado.
+- While, do while: Para que el jugador pueda decidir si quiere otra carta o no
+- If,  else - if: Para verificar quién ganó o si hubo empate.
+- rand(): se utilizará para generar los números de la carta del 1 al 11.
+- Array: Se podrá utilizar para manejar la mano de cartas.
 
-**3. Palabra invertida:**
-**Temática:** Es un juego para 2 personas, Se basa en mostrar una palabra invertida al azar, cada jugador cuenta únicamente con 1 intentos por ronda para adivinar la palabra correcta, el jugador que adivine la mayor cantidad de rondas, gana la partida.
-
+**3. Palabra ordenada:**
+**Temática:** Es un juego para 1 y 2 personas. Se basa en mostrar una palabra que está ordenada al azar la cual, cada jugador cuenta únicamente con 1 intentos por ronda para adivinar y ordenar la palabra correcta, el jugador que adivine la mayor cantidad de rondas, gana la partida.
 
 **Conceptos clave:**
 - Switch case: Menú de bienvenida con las opciones de jugar o volver al menú principal.
@@ -39,12 +38,22 @@ Listado de minijuegos:
 - Do while: Repetir el juego según el usuario.
 - For: Repetir las rondas del juego.
 - If else: Validar las respuestas de cada jugador y determinar si son correctas.
-- String: Manipular las palabras(invertir, manipular, mostrar).
+- String: Manipular las palabras(ordenar aleatoriamente, manipular, mostrar).
 - rand(): Elegir palabras aleatoriamente para cada ronda y jugador.
+
+**4. Carrera de buses:**
+**Temática:** Es un minijuego representado por una carrera de buses para dos personas, en este caso multijugador con una persona externa y contra la computadora(CPU), consiste en una competencia aleatoria donde dos autobuses avanzan por turnos de forma aleatoria por una pista horizontal.
+
+**Conceptos clave:**
+- Rand(): Para determinar los pasos que avanza cada jugador.
+- Librerías.
+- If-else: Determinar el bus ganador.
+- While: Ejecutar la carrera hasta que un jugador alcance la meta.
+- Switch: Menu interactivo.
 
 ## Equipo
 
-- **Nombre del equipo:** Objetos no orientados
+- **Nombre del equipo:** Objetos no tan orientados
 ### Integrantes del equipo
 
 1. **Nombre completo:** Josué Abdel Ortiz Deodanes  
