@@ -42,10 +42,10 @@ Listado de minijuegos:
 - rand(): Elegir palabras aleatoriamente para cada ronda y jugador.
 
 **4. Carrera de buses:**
-**Temática:** Es un minijuego representado por una carrera de buses para dos personas, en este caso multijugador con una persona externa y contra la computadora(CPU), consiste en una competencia aleatoria donde dos autobuses avanzan por turnos de forma aleatoria por una pista horizontal.
+**Temática:** Es un minijuego representado por una carrera de buses para dos personas, en este caso multijugador con una persona externa y contra la computadora(CPU), consiste en una competencia aleatoria donde dos autobuses avanzan por turnos en una pista horizontal, donde cada jugador se le asigna una tecla y tiene que presionarla una cantidad de veces para avanzar.
 
 **Conceptos clave:**
-- Rand(): Para determinar los pasos que avanza cada jugador.
+- Rand(): Para determinar los pasos que avanza CPU.
 - Librerías.
 - If-else: Determinar el bus ganador.
 - While: Ejecutar la carrera hasta que un jugador alcance la meta.
@@ -75,3 +75,4 @@ Listado de minijuegos:
 1. Clona este repositorio en tu máquina local:
    ```bash
    git clone [URL del repositorio]
+
