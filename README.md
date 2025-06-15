@@ -76,3 +76,13 @@ Listado de minijuegos:
    ```bash
    git clone [URL del repositorio]
 
+
+
+Para nombrar archivos y carpetas nuevos, vamos a usar
+camelCase
+
+Para nombrar variables
+snake_case
+
+Para Funciones
+PascalCase
