@@ -86,3 +86,6 @@ snake_case
 
 Para Funciones
 PascalCase
+
+//Ejecutar el proyecto
+g++ -o main .\main.cpp .\src\menuV.cpp
