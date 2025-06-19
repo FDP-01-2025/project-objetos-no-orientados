@@ -22,9 +22,9 @@ int main()
     cout << "Player 2: " << player_2 << std::endl;
 
     // Mandar a llamar la funcion de escoger juego
-    // ChooseGame();
+    ChooseGame();
 
-    int option;
+    /*int option;
     cout << "Juego a trabajar" << endl;
     cin >> option;
 
@@ -51,5 +51,5 @@ int main()
         break;
     default:
         break;
-    }
+    }*/
 }

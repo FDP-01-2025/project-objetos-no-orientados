@@ -67,7 +67,7 @@ void ChooseGame()
             std::cin.clear(); // Limpia el estado de error.
             option = 0;       // Fuerza la repetición del bucle.
         }
-        switch (opcion)
+        switch (option)
         {
         case 1:
             break;
