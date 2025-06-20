@@ -46,7 +46,25 @@ void PlayersName()
     } while (option != 1);
     // Si la opcion es distinta de 1 se repite
 }
-
+// Definicion directa de la funcion creada GameMode(), solitar sub-menu oara cada juego 
+void GameMode(int option)
+{
+    switch (option)
+    {
+    case 1:
+        cout << "1 vs 1" << endl; 
+        break;
+    case 2:
+        cout << "1 vs cpu" << endl; 
+        break;    
+    case 3:
+        cout << "Save match" << endl; 
+        break;
+    default:
+        break;
+    }
+    
+}
 /// Definicion directa de la funcion creada ChooseGame(), solitar juego
 void ChooseGame()
 {
@@ -55,7 +73,8 @@ void ChooseGame()
     // Bucle en caso de algun error
     do
     {
-        cout << "\n----- Choose one of our games that we present -----\n" << endl;
+        cout << "\n----- Choose one of our games that we present -----\n"
+             << endl;
         // Se muestran los juegos disponibles
         cout << "1.Dice Battle \n2. 21 POKER\n3.Crazy word\n4.Carrera de busus\n5.Leave The game" << endl;
         cin >> option;
@@ -70,19 +89,51 @@ void ChooseGame()
         switch (option)
         {
         case 1:
-            break;
+        {
+            int choise;
+            cout << "\n----- Choose one of our games mode -----\n"; // se manda llamar la la funcion GameMode
+            cout << "1. 1 vs 1 \n2. 1 vs cpu\n3.Save match" << endl;
+            cin >> choise;
+            GameMode(choise);
+        }
+        break;
+
         case 2:
-            break;
-        case 3: 
-            break;
+        {
+            int choise; 
+            cout << "\n----- Choose one of our games mode -----\n"; 
+            cout << "1. 1 vs 1 \n2. 1 vs cpu\n3.Save match" << endl;
+            cin >> choise;
+            GameMode(choise);
+        }
+
+        break;
+        case 3:
+        {
+            int choise;
+            cout << "\n----- Choose one of our games mode -----\n";
+            cout << "1. 1 vs 1 \n2. 1 vs cpu\n3.Save match" << endl;
+            cin >> choise;
+            GameMode(choise);
+        }
+
+        break;
         case 4:
-            break;
+        {
+            int choise;
+            cout << "\n----- Choose one of our games mode -----\n";
+            cout << "1. 1 vs 1 \n2. 1 vs cpu\n3.Save match" << endl;
+            cin >> choise;
+            GameMode(choise);
+        }
+
+        break;
         case 5:
+        cout << "leaving the game" << endl;
             break;
         default:
             break;
         }
     } while (option != 5);
-
 }
 #endif
