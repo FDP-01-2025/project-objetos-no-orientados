@@ -124,7 +124,7 @@ void BusRaceMenu()
     } while (option != 6);
 }
 // Menu de juego, funcion para elegir la modalidad de juego
-void 21PokerMenu()
+void Poker21Menu()
 {
     int option;
     do
@@ -230,7 +230,7 @@ void ChooseGame()
             DiceBattleMenu();
             break;
         case 2:
-            21PokerMenu();
+            Poker21Menu();
             break;
         case 3:
             MessyWordMenu();
