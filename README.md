@@ -88,4 +88,4 @@ Para Funciones
 PascalCase
 
 //Ejecutar el proyecto
-g++ -o main .\main.cpp .\src\menuV.cpp
+g++ -o main .\main.cpp .\src\menuV.cpp 

@@ -95,7 +95,7 @@ void iniciarCarrera1vs1()
 
     cout << "\n¡La carrera ha comenzado!\n";
     cout << "Presiona [X] para avanzar tu bus 1.\n";
-    cout << "Presiona [C] para avanzar tu bus 2.\n";
+    cout << "Presiona [B] para avanzar tu bus 2.\n";
 
     while (Player_Main < GOAL && Player_2 < GOAL)
     {
@@ -107,12 +107,12 @@ void iniciarCarrera1vs1()
         {
             Player_Main++;
         }
-        else if (tecla == 'c' || tecla == 'C')
+        else if (tecla == 'b' || tecla == 'B')
         {
             Player_2++;
         }
 
-        system("cls"); // Limpia la pantalla (Windows)
+        system("cls"); // Limpia la terminal (Windows)
     }
 
     ShowTrack1vs1(Player_Main, Player_2);
