@@ -9,6 +9,7 @@
 #include <string> // include string for error formatting
 // Include the content of the games, the address of the files is called
 #include "busRace/busRace.h"
+#include "cardGame21/carGame.h"
 // #include "cardGame21/carGame.h"
 // #include "messyWord/messyWord.h"
 // #include "diceBattle/diceBattle.h"
@@ -183,10 +184,10 @@ void Poker21Menu()
         switch (option)
         {
         case 1:
-            cout << "Play 1 vs CPU\n";
             break;
         case 2:
-            cout << "Play 1 vs 1\n";
+            PlayerSecondName();
+            Play21();
             break;
         case 3:
             cout << "Save Game\n";
