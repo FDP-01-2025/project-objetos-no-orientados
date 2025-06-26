@@ -1,63 +1,98 @@
-/*En este archivo estan las funciones de todos los menus de los juegos, cada funcion representa el menu que le corresponde*/
-/*Librerias*/
-/*Definicion de ifndef para evitar errores de sobreescritura, preveencion de errores*/
+/*This file contains the functions for all the game menus.
+ * Each function represents the menu it corresponds to.*/
+// libraries
+// Prevents redefinition errors or conflicts due to multiple inclusions.
 #ifndef MENU_H
 #define MENU_H
-#include <limits> //evita errores si el usuario ingresa más datos de los esperados
+#include <limits> // Avoid errors if the user enters more data than expected
 #include <iostream>
-#include <string> // include string para el formato de los nombres
-// Archivo .h del juego Bus Race
+#include <string> // include string for error formatting
+// Include the content of the games, the address of the files is called
 #include "busRace/busRace.h"
+// #include "cardGame21/carGame.h"
+// #include "messyWord/messyWord.h"
+// #include "diceBattle/diceBattle.h"
 
-// Libreria std para mensajes de texto
+// Libraries std for text message
 using namespace std;
 
-/*Declaracion de variables globales*/
+// Declaration of global variables
 extern string player_1;
 extern string player_2;
 
-/// Definicion directa de playersName para solicitar los nombres
+/// Direct definition of playersName to request name
 void PlayersName()
 {
-    // Opcion para solicitar el nombre de nuevo
+    // Option to request the name again
     int option;
-    // Bucle do While para solitar nombre en caso de algun error
+    // Bucle do While to request name in case of any error
     do
     {
-        // Solicitud de nombre princpal de jugador 1
+        // Name of the main player, request
         cout << "Main player name 1: ";
         getline(cin, player_1);
 
-        // Validacion de nombres
+        // Option for name validation
         cout << "confirm name? \n1.Yes \n2.No" << endl;
         cin >> option;
 
-        // Limpia el buffer de entrada para evitar errores en la próxima lectura.
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        // Clears the input buffer to avoid errors on the next read.
+        cin.ignore(::numeric_limits<streamsize>::max(), '\n');
 
-        if (std::cin.fail())
-        {                     // Si el usuario no ingresó un número.
-            std::cin.clear(); // Limpia el estado de error.
-            option = 2;       // Fuerza la repetición del bucle.
+        if (cin.fail())
+        {                // If the user did not enter a number.
+            cin.clear(); // Clears the error state.
+            option = 2;  // Forces the loop to repeat.
         }
-        system("cls"); // Limpia la pantalla (Windows)
+        system("cls"); // Clears the terminal (Windows)
 
     } while (option != 1);
-    // Si la opcion es distinta de 1 se repite
+    // If the option is different from 1 it is repeated
 }
-// Menu de juego, funcion para elegir la modalidad de juego
+/// Direct definition for second player name
+void PlayerSecondName()
+{
+    // Option to request the name again
+    int option;
+    // Bucle do While to request name in case of any error
+    do
+    {
+        // Name of the main player, request
+        cout << "Name player 2: ";
+        getline(cin, player_2);
+
+        // Option for validation name
+        cout << "confirm name? \n1.Yes \n2.No" << endl;
+        cin >> option;
+
+        // Clears the input buffer to avoid errors on the next read.
+        cin.ignore(::numeric_limits<streamsize>::max(), '\n');
+
+        if (cin.fail())
+        {                // If the user did not enter a number.
+            cin.clear(); // Clears the error state.
+            option = 2;  // Forces the loop to repeat.
+        }
+        system("cls"); // Clears the terminal (Windows)
+    } while (option != 1);
+    // If the option is different from 1 it is repeated
+}
+/// Game menu, function to select the game mode
 void MessyWordMenu()
 {
+    // Variable for the do-while loop and select game
     int option;
     do
     {
+        // Message for menu of the select game
         cout << "\n--- Welcome to Messy Word " << player_1 << "---\n";
         cout << "--- Messy Word Menu ---\n";
-        cout << "1. 1 vs CPU\n2. 1 vs 1\n3. Save Game \n4. Load Game\n5. Load\n6. Back\n";
+        cout << "1. 1 vs CPU\n2. 1 vs 1\n3. Save Game \n4. Load Game\n5. Game Rules\n6. Exit\n";
+        // It is stored in the variable option
         cin >> option;
-
+        // Prevents previous entries from affecting new readings
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
+        // Switch case for select de Game mode
         switch (option)
         {
         case 1:
@@ -84,26 +119,32 @@ void MessyWordMenu()
         }
     } while (option != 6);
 }
-// Menu de juego, funcion para elegir la modalidad de juego
+/// Game menu, function to select the game mode
 void BusRaceMenu()
 {
+    // Variable for the do-while loop and select game
     int option;
     do
     {
+        // Message for menu of the select game
         cout << "\n--- Welcome to Bus Race " << player_1 << "---\n";
         cout << "--- Bus Race Menu ---\n";
-        cout << "1. 1 vs CPU\n2. 1 vs 1\n3. Save Game \n4. Load Game\n5. Load\n6. Back\n";
+        cout << "1. 1 vs CPU\n2. 1 vs 1\n3. Save Game \n4. Load Game\n5. Game Rules\n6. Exit\n";
+        // It is stored in the variable option
         cin >> option;
-
+        // Prevents previous entries from affecting new readings
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
+        // Switch case for select de Game mode
         switch (option)
         {
         case 1:
             cout << "Play 1 vs CPU\n";
+            IniciarCarreraCPU();
             break;
         case 2:
             cout << "Play 1 vs 1\n";
+            PlayerSecondName();
+            IniciarCarrera1vs1();
             break;
         case 3:
             cout << "Save Game\n";
@@ -123,19 +164,22 @@ void BusRaceMenu()
         }
     } while (option != 6);
 }
-// Menu de juego, funcion para elegir la modalidad de juego
+/// Game menu, function to select the game mode
 void Poker21Menu()
 {
+    // Variable for the do-while loop and select game
     int option;
     do
     {
+        // Message for menu of the select game
         cout << "\n--- Welcome to 21 Poker " << player_1 << "---\n";
         cout << "--- 21 Poker Menu Menu ---\n";
-        cout << "1. 1 vs CPU\n2. 1 vs 1\n3. Save Game \n4. Load Game\n5. Load\n6. Back\n";
+        cout << "1. 1 vs CPU\n2. 1 vs 1\n3. Save Game \n4. Load Game\n5. Game Rules\n6. Exit\n";
+        // It is stored in the variable option
         cin >> option;
-
+        // Prevents previous entries from affecting new readings
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
+        // Switch case for select de Game mode
         switch (option)
         {
         case 1:
@@ -162,20 +206,22 @@ void Poker21Menu()
         }
     } while (option != 6);
 }
-/// Definicion directa de la funcion creada ChooseGame(), solitar juego
-// Menu de juego, funcion para elegir la modalidad de juego
+/// Game menu, function to select the game mode
 void DiceBattleMenu()
 {
+    // Variable for the do-while loop and select game
     int option;
     do
     {
+        // Message for menu of the select game
         cout << "\n--- Welcome to Dice Battle " << player_1 << "---\n";
         cout << "--- Dice Battle Menu ---\n";
-        cout << "1. 1 vs CPU\n2. 1 vs 1\n3. Save Game \n4. Load Game\n5. Load\n6. Back\n";
+        cout << "1. 1 vs CPU\n2. 1 vs 1\n3. Save Game \n4. Load Game\n5. Game Rules\n6. Exit\n";
+        // It is stored in the variable option
         cin >> option;
-
+        // Prevents previous entries from affecting new readings
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
+        // Switch case for select de Game mode
         switch (option)
         {
         case 1:
@@ -202,28 +248,28 @@ void DiceBattleMenu()
         }
     } while (option != 6);
 }
-//Menu principal del juego
+/// Main Game menu 
 void ChooseGame()
 {
-    // Definicion de la variable para el juego a escoger
+    // Definition of the variable for the game to choose
     int option;
-    // Bucle en caso de algun error
+    // Do while loop to choose the desired game or exit
     do
     {
         cout << "\n----- Welcome to Royale Casino " << player_1 << " -----\n";
         cout << "----- Select the game you want to run: -----\n";
-        // Se muestran los juegos disponibles
+        // Messages about available games
         cout << "1.Dice Battle \n2.21 POKER\n3.Crazy word\n4.Bus Race\n5.Leave The game" << endl;
         cin >> option;
-        // Limpia el buffer de entrada para evitar errores en la próxima lectura.
+        // Prevents previous entries from affecting new readings
         cin.ignore(numeric_limits<::streamsize>::max(), '\n');
 
         if (cin.fail())
-        {                // Si el usuario no ingresó un número.
-            cin.clear(); // Limpia el estado de error.
-            option = 0;  // Fuerza la repetición del bucle.
+        {                // If the user did not enter a number.
+            cin.clear(); // Clears the error state.
+            option = 0;  // Forces the loop to repeat.
         }
-        // Switch que manda a llamar la funcion del menu correspondiente al juego
+        // Switch that calls the menu function corresponding to the game
         switch (option)
         {
         case 1:
@@ -236,6 +282,7 @@ void ChooseGame()
             MessyWordMenu();
             break;
         case 4:
+        // Game menu function
             BusRaceMenu();
             break;
         case 5:
