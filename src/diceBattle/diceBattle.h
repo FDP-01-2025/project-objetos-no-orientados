@@ -113,7 +113,7 @@ int PlayerTurn(string name){
 void PlayGame()
 {
     int totalRounds;
-    cout << "¿Cuántas rondas deseas jugar? ";
+    cout << "¿How many rounds do you want to play?? ";
     cin >> totalRounds;
 
     int score1 = 0;
@@ -121,7 +121,7 @@ void PlayGame()
 
     for (int i = 1; i <= totalRounds; ++i)
     {
-        cout << "\n--- Ronda " << i << " ---" << endl;
+        cout << "\n--- Round " << i << " ---" << endl;
         int p1 = PlayerTurn(name1);
         int p2 = PlayerTurn(modeVSCPU ? "CPU" : name2);
 
@@ -141,16 +141,16 @@ void PlayGame()
         }
     }
 
-    cout << "\n--- Resultado final ---" << endl;
-    cout << name1 << ": " << score1 << " puntos" << endl;
-    cout << (modeVSCPU ? "CPU" : name2) << ": " << score2 << " puntos" << endl;
+    cout << "\n--- Final score ---" << endl;
+    cout << name1 << ": " << score1 << " points" << endl;
+    cout << (modeVSCPU ? "CPU" : name2) << ": " << score2 << " points" << endl;
 
     if (score1 > score2)
-        cout << name1 << " ¡gana el juego!" << endl;
+        cout << name1 << " ¡win the game!" << endl;
     else if (score2 > score1)
-        cout << (modeVSCPU ? "CPU" : name2) << " ¡gana el juego!" << endl;
+        cout << (modeVSCPU ? "CPU" : name2) << " ¡win the game!" << endl;
     else
-        cout << "¡El juego terminó en empate!" << endl;
+        cout << "¡The game ended in a tie!" << endl;
 }
 //Choose game mode
 void SelectMode(){
