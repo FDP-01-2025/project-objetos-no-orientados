@@ -15,7 +15,7 @@ using namespace std;
 //Global variables
 string name1 = "Player 1";
 string name2 = "Player 2";
-bool modeVSCPU = false; // Indicates whether you chose to play against the CPU or not
+bool modeVSCPU; // Indicates whether you chose to play against the CPU or not
 
 // Random number generator.
 int StartRandom()
@@ -110,15 +110,47 @@ int PlayerTurn(string name){
     return 0;
 }
 //Function to play the round
-void PlayRound(){
-    int p1 = PlayerTurn(name1);
-    int p2 = PlayerTurn(modeVSCPU ? "CPU" : name2);
-    if(p1 > p2)
-    cout << name1 << "I win the round!" << endl;
-    else if (p2 > p1)
-    cout << (modeVSCPU ? "CPU" : name2) << "I win the round!" << endl;
+void PlayGame()
+{
+    int totalRounds;
+    cout << "¿Cuántas rondas deseas jugar? ";
+    cin >> totalRounds;
+
+    int score1 = 0;
+    int score2 = 0;
+
+    for (int i = 1; i <= totalRounds; ++i)
+    {
+        cout << "\n--- Ronda " << i << " ---" << endl;
+        int p1 = PlayerTurn(name1);
+        int p2 = PlayerTurn(modeVSCPU ? "CPU" : name2);
+
+        if (p1 > p2)
+        {
+            cout << name1 << " ¡win the round!" << endl;
+            score1++;
+        }
+        else if (p2 > p1)
+        {
+            cout << (modeVSCPU ? "CPU" : name2) << " ¡win the round!" << endl;
+            score2++;
+        }
+        else
+        {
+            cout << "¡Draw!" << endl;
+        }
+    }
+
+    cout << "\n--- Resultado final ---" << endl;
+    cout << name1 << ": " << score1 << " puntos" << endl;
+    cout << (modeVSCPU ? "CPU" : name2) << ": " << score2 << " puntos" << endl;
+
+    if (score1 > score2)
+        cout << name1 << " ¡gana el juego!" << endl;
+    else if (score2 > score1)
+        cout << (modeVSCPU ? "CPU" : name2) << " ¡gana el juego!" << endl;
     else
-    cout << "¡Draw!" << endl;
+        cout << "¡El juego terminó en empate!" << endl;
 }
 //Choose game mode
 void SelectMode(){
