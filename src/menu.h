@@ -184,6 +184,7 @@ void Poker21Menu()
         switch (option)
         {
         case 1:
+            Play21Cpu();
             break;
         case 2:
             PlayerSecondName();

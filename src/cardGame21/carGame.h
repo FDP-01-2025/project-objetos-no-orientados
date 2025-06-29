@@ -153,4 +153,57 @@ void Play21()
         cout << "Draw" << endl;
 }
 
+void Play21Cpu()
+{
+    srand(time(0));
+
+    //Calling variables for player 1 and player 2
+    cout << player_1 << ": ";
+
+    int playerTotal = PlayerTurn(player_1);
+
+    // 
+    int cpuTotal = 0;
+    cout << "\nCPU's turn:" << endl;
+
+    while (cpuTotal < 17) // 
+    {
+        int card = RamdomCard();
+        cout << "CPU got a card: " << card << endl;
+        cpuTotal += card;
+        cout << "CPU total: " << cpuTotal << endl;
+    }
+
+    cout << "\n--- Final Results ---" << endl;
+    cout << player_1 << ": " << playerTotal << endl;
+    cout << "CPU: " << cpuTotal << endl;
+
+    //
+    if (playerTotal > 21 && cpuTotal > 21)
+    {
+        cout << "Both busted. No one wins!" << endl;
+    }
+    else if (playerTotal > 21)
+    {
+        cout << "You busted. CPU wins!" << endl;
+    }
+    else if (cpuTotal > 21)
+    {
+        cout << "CPU busted. " << player_1 << " wins!" << endl;
+    }
+    else if (playerTotal == cpuTotal)
+    {
+        cout << "It's a draw!" << endl;
+    }
+    else if (playerTotal > cpuTotal)
+    {
+        cout << player_1 << " wins!" << endl;
+    }
+    else
+    {
+        cout << "CPU wins!" << endl;
+    }
+}
+
+
 #endif
