@@ -113,6 +113,7 @@ void MessyWordMenu()
             break;
         case 5:
             cout << "Game Rules\n";
+            GameRules();
             break;
         case 6:
             cout << "Exit\n";

@@ -7,7 +7,7 @@
 #include <string>    // Strings management
 #include <vector>    // Use of vectors
 #include <algorithm> // Shuffle
-#include <random>    // Fr random_device and default_random_engine
+#include <random>    // For random_device and default_random_engine
 #include <ctime>     // time(0)
 #include <cstdlib>   // rand(), srand()
 
@@ -25,8 +25,12 @@ inline void StarRandom()
 // Return word list
 inline vector<string> GetWords()
 {
-    return {
-        "computer", "screen", "mouse", "keyboard", "code", "program", "technology"};
+     return {
+        "computer", "screen", "mouse", "keyboard", "code", "program", "technology", 
+        "monitor", "printer", "internet", "software", "hardware", "algorithm", "netwok",
+        "database", "security", "browser", "website", "password", "memory", "backup",
+        "download", "upload", "scanner", "desktop", "laptop", "server", "cloud", "router", "email"
+    };
 }
 
 // Pick one random word
@@ -90,7 +94,7 @@ inline void OnePlayerMode()
         }
 
         // CPU turn
-        cout << "\nCPU is guessing...\n";
+        cout << "\n[CPU Turn]\nCPU is guessing...\n";
         if (CpuGuessRight())
         {
             cout << "CPU: " << word << " --Correcto--\n";
@@ -182,6 +186,38 @@ inline void TwoPlayerMode()
         cout << "--TIE--\n";
     }
     StopMessyWord();
+}
+
+inline void GameRules(){
+    {
+    cout << "\n=================================================\n";
+    cout << "                MESSY WORD GAME RULES            \n";
+    cout << "=================================================\n";
+    cout << "OBJECTIVE:\n";
+    cout << "- Guess scrambled words over several rounds.\n";
+    cout << "- The player with the most correct guesses wins.\n\n";
+    
+    cout << "GAME MODES:\n";
+    cout << "1) One Player Mode (1 vs CPU)\n";
+    cout << "   - 5 rounds.\n";
+    cout << "   - Player guesses the scrambled word.\n";
+    cout << "   - CPU guesses randomly with 50% chance of being correct.\n";
+    cout << "2) Two Player Mode (1 vs 1)\n";
+    cout << "   - 3 rounds.\n";
+    cout << "   - Each player gets a scrambled word and guesses.\n\n";
+    
+    cout << "SCORING SYSTEM:\n";
+    cout << "- +1 point per correct word guessed.\n";
+    cout << "- The player with the most points wins.\n\n";
+    
+    cout << "TIEBREAKERS:\n";
+    cout << "- If both players have the same score, the game ends in a tie.\n\n";
+    
+    cout << "CPU RULES:\n";
+    cout << "- CPU guesses each word with a 50% chance of correctness.\n";
+    cout << "=================================================\n";
+    Stop();
+}
 }
 
 #endif
