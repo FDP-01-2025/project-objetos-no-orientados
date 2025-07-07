@@ -1,6 +1,7 @@
 #ifndef DICE_BATTLE_H
 #define DICE_BATTLE_H
 
+// Libraries
 #include <iostream>
 #include <fstream>
 #include <windows.h>
@@ -11,6 +12,7 @@
 
 using namespace std;
 
+// Variables
 string name1 = "Player 1";
 string name2 = "Player 2";
 bool modeVSCPU;
@@ -106,6 +108,7 @@ void SaveResult(string winner, int score1, int score2, bool vsCPU)
     }
 }
 
+// Save progress
 void SaveGameProgress(int currentRound, int total, int score1, int score2, bool vsCPU)
 {
     ofstream file("savegame.txt");
@@ -118,6 +121,7 @@ void SaveGameProgress(int currentRound, int total, int score1, int score2, bool 
     }
 }
 
+// Load game
 void LoadGameProgress()
 {
     ifstream file("savegame.txt");
@@ -142,6 +146,7 @@ void LoadGameProgress()
     }
 }
 
+// Player turn
 int DicePlayerTurn(string name)
 {
     int d1 = ThrowDice();
