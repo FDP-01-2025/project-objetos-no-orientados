@@ -15,7 +15,7 @@ int main()
 {
     cout << "---Royale Casino---" << endl;
     /// Mandar a llamar a la funcion
-    PlayersName();
+    LoadPlayerNames();
     // Muestra los nombres guardados en las variables globales
     cout << "\n----- Players ---\n";
     cout << "Player 1: " << player_1 << std::endl;

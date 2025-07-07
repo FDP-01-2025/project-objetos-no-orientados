@@ -2,7 +2,7 @@
 // Bookstores
 #ifndef BUSRACE_H // Defining ifndef to avoid overwriting errors
 #define BUSRACE_H
-#include <iomanip>  // Libreria que permite alinear el texto con un ancho fijo
+#include <iomanip>  // Library that allows you to align text with a fixed width
 #include <iostream> //Avoid errors if the user enters more data than expected
 #include <iostream>
 #include <string>  // For name format
@@ -24,7 +24,7 @@ extern string player_2;
 // Pause function to see the game result
 void Stop()
 {
-    cout << "\nPresiona ENTER para continuar...";
+    cout << "\nPress ENTER to continue...";
     cin.ignore();
     cin.get(); // Wait for the user to press enter
 }
@@ -112,11 +112,15 @@ void StartRaceCPU()
     int Player_CPU = 0;
     char key;
 
-    cout << "\n¡The race has begun!\n";
-    cout << "Press [X] to advance your bus.\n";
+    // cout << "\n¡The race has begun!\n";
+    /// cout << "Press [X] to advance your bus.\n";
 
     while (Player_Main < GOAL && Player_CPU < GOAL)
     {
+        cout << "\n¡The race has begun!\n";
+        cout << "Press [X] to advance your bus.\n";
+
+        cout << endl;
         ShowTrack(Player_Main, Player_CPU);
 
         // Player Preview
@@ -160,12 +164,13 @@ void StartRace1vs1()
     int Player_2 = 0;
     char key;
 
-    cout << "\n¡The race has begun!\n";
-    cout << "Press [X] to advance your bus 1.\n";
-    cout << "Press [B] to advance your bus 2.\n";
-
     while (Player_Main < GOAL && Player_2 < GOAL)
     {
+        cout << "\n¡The race has begun!\n";
+        cout << "Press [X] to advance your bus 1.\n";
+        cout << "Press [B] to advance your bus 2.\n";
+        cout << endl;
+
         ShowTrack1vs1(Player_Main, Player_2);
 
         // Player Preview

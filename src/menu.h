@@ -20,6 +20,26 @@ using namespace std;
 extern string player_1;
 extern string player_2;
 
+/// funcion para almancenar los nombres de los jugadores en un txt
+void SavePlayers()
+{
+    ofstream file("item.txt");
+
+    if (file.is_open())
+    {
+        file << "-------- Players Names --------\n"
+             << endl; // Header
+        file << "Player 1: " << player_1 << endl;
+        file << "\nPlayer 2: " << player_2 << endl; // Write the name to the file
+        file.close();                               // Close the file
+    }
+    else
+    {
+        // Error validation
+        cout << "Error save names." << endl;
+    }
+}
+
 /// Direct definition of playersName to request name
 void PlayersName()
 {
@@ -50,20 +70,8 @@ void PlayersName()
     } while (option != 1);
     // If the option is different from 1 it is repeated
 
-    // Luego de validar el nombre, se guarda el nombre en el txt
-    ofstream file("item.txt");
-    // Si el archivo esta abierto...
-    if (file.is_open())
-    {
-
-        file << "Player 1: " << player_1 << endl;
-        file << player_1 << endl; // Write the name to the file
-        file.close();             // Close the file
-    }
-    else
-    {
-        cout << "Error opening file." << endl;
-    }
+    // funcion para almacenar los nombres
+    SavePlayers();
 }
 /// Direct definition for second player name
 void PlayerSecondName()
@@ -93,17 +101,52 @@ void PlayerSecondName()
     } while (option != 1);
     // If the option is different from 1 it is repeated
 
-    ofstream file("item.txt");
+    // function to store names
+    SavePlayers();
+}
+
+// Function to load names if they exist
+void LoadPlayerNames()
+{
+    ifstream file("item.txt");
+
     if (file.is_open())
     {
-        file << "Player 1: " << player_1 << endl;
-        file.close(); // Close the file
+        string line; // Read empty lines
+
+        getline(file, line); // header line
+        getline(file, line); // empty line
+
+        // read player 1 name
+        getline(file, line);
+        // It is validated that the line is not empty and contains ":"
+        // After validating, extract the name of player 1
+        if (!line.empty() && line.find(":") != string::npos)
+        {
+            player_1 = line.substr(line.find(":") + 2);
+        }
+
+        // read player 2 name
+        getline(file, line);
+        if(!line.empty() && line.find(":") != string::npos)
+        {
+            player_2 = line.substr(line.find(":") + 2);
+        }
+
+        file.close();
     }
     else
+    { // Errror validation
+        cout << "Error loading names." << endl;
+    }
+
+    // Verify after to read the names
+    if (player_1.empty())
     {
-        cout << "Error opening file." << endl;
+        PlayersName(); // If the name does not exist, it is requested
     }
 }
+
 /// Game menu, function to select the game mode
 void MessyWordMenu()
 {
@@ -113,7 +156,7 @@ void MessyWordMenu()
     {
         // Message for menu of the select game
         cout << "\n=================================================\n";
-        cout << "             WELCOME TO MESSY WORD "<<player_1<<"\n";
+        cout << "             WELCOME TO MESSY WORD " << player_1 << "\n";
         cout << "=================================================\n";
         cout << "---------------- Messy Word Menu ----------------\n";
         cout << "\n1. 1 vs CPU\n2. 1 vs 1\n3. Save Game \n4. Load Game\n5. Game Rules\n6. Exit\n";
@@ -125,11 +168,11 @@ void MessyWordMenu()
         switch (option)
         {
         case 1:
-            cout <<"\n----------------- Play 1 vs CPU -----------------\n";
+            cout << "\n----------------- Play 1 vs CPU -----------------\n";
             OnePlayerMode();
             break;
         case 2:
-            cout <<"\n------------------ Play 1 vs 1 ------------------\n";
+            cout << "\n------------------ Play 1 vs 1 ------------------\n";
             PlayerSecondName();
             TwoPlayerMode();
             break;
@@ -161,7 +204,7 @@ void BusRaceMenu()
     {
         // Message for menu of the select game
         cout << "\n=================================================\n";
-        cout << "             WELCOME TO BUS RACE "<<player_1<<"\n";
+        cout << "             WELCOME TO BUS RACE " << player_1 << "\n";
         cout << "=================================================\n";
         cout << "----------------- Bus Race Menu -----------------\n";
         cout << "\n1. 1 vs CPU\n2. 1 vs 1\n3. New Game \n4. Load Game\n5. Game Rules\n6. Exit\n";
@@ -173,12 +216,16 @@ void BusRaceMenu()
         switch (option)
         {
         case 1:
-            cout <<"\n----------------- Play 1 vs CPU -----------------\n";
+            cout << "\n----------------- Play 1 vs CPU -----------------\n";
             StartRaceCPU();
             break;
         case 2:
-            cout <<"\n------------------ Play 1 vs 1 ------------------\n";
-            PlayerSecondName();
+            cout << "\n------------------ Play 1 vs 1 ------------------\n";
+            // if dont exist player_2 name, request it
+            if(player_2.empty())
+            {
+                PlayerSecondName(); // If player 2 name is empty, request it
+            }
             StartRace1vs1();
             break;
         case 3:
@@ -209,7 +256,7 @@ void Poker21Menu()
     {
         // Message for menu of the select game
         cout << "\n=================================================\n";
-        cout << "             WELCOME TO 21 POKER "<<player_1<<"\n";
+        cout << "             WELCOME TO 21 POKER " << player_1 << "\n";
         cout << "=================================================\n";
         cout << "----------------- 21 Poker Menu -----------------\n";
         cout << "\n1. 1 vs CPU\n2. 1 vs 1\n3. Game Rules\n4. Exit\n";
@@ -221,11 +268,11 @@ void Poker21Menu()
         switch (option)
         {
         case 1:
-            cout <<"\n----------------- Play 1 vs CPU -----------------\n";
+            cout << "\n----------------- Play 1 vs CPU -----------------\n";
             Play21Cpu();
             break;
         case 2:
-            cout <<"\n------------------ Play 1 vs 1 ------------------\n";
+            cout << "\n------------------ Play 1 vs 1 ------------------\n";
             PlayerSecondName();
             Play21();
             break;
@@ -250,7 +297,7 @@ void DiceBattleMenu()
     {
         // Message for menu of the select game
         cout << "\n=================================================\n";
-        cout << "            WELCOME TO DICE BATTLE "<<player_1<<"\n";
+        cout << "            WELCOME TO DICE BATTLE " << player_1 << "\n";
         cout << "=================================================\n";
         cout << "--------------- Dice Battle Menu ----------------\n";
         cout << "\n1. 1 vs CPU\n2. 1 vs 1\n3. Load Game\n4. Game Rules\n5. Exit\n";
@@ -262,11 +309,11 @@ void DiceBattleMenu()
         switch (option)
         {
         case 1:
-            cout <<"\n----------------- Play 1 vs CPU -----------------\n";
+            cout << "\n----------------- Play 1 vs CPU -----------------\n";
             PlayGameCPU();
             break;
         case 2:
-            cout <<"\n------------------ Play 1 vs 1 ------------------\n";
+            cout << "\n------------------ Play 1 vs 1 ------------------\n";
             PlayGamePVP();
             break;
         case 3:
@@ -296,7 +343,7 @@ void ChooseGame()
     do
     {
         cout << "\n=================================================\n";
-        cout << "           WELCOME TO ROYAL CASINO "<<player_1<<"\n";
+        cout << "           WELCOME TO ROYAL CASINO " << player_1 << "\n";
         cout << "=================================================\n";
         cout << "         Select the game you want to run:\n";
         cout << "_________________________________________________\n";
