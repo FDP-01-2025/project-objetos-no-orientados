@@ -1,4 +1,0 @@
-Winner: CPU | Player 1: 0 | CPU: 1
-Winner: Player 1 | Player 1: 1 | CPU: 0
-Winner: Player 1 | Player 1: 1 | CPU: 0
-Winner: Player 1 | Player 1: 1 | CPU: 0

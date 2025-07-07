@@ -13,7 +13,7 @@
 using namespace std;
 
 // Variables
-string name1 = "Player 1"; // Name player 1
+string name1 = player_1; // Name player 1
 string name2 = "Player 2"; // Name player 2
 bool modeVSCPU;
 
@@ -100,11 +100,11 @@ void AnimationDice()
 // Save the result
 void SaveResult(string winner, int score1, int score2, bool vsCPU)
 {
-    ofstream file("diceBattle.txt", ios::app);
+    ofstream file("items.txt", ios::app);
     if (file.is_open())
     {
         file << "Winner: " << winner << " | ";
-        file << name1 << ": " << score1 << " | ";
+        file << player_1 << ": " << score1 << " | ";
         file << (vsCPU ? "CPU" : name2) << ": " << score2 << endl;
         file.close();
     }
@@ -117,7 +117,7 @@ void SaveGameProgress(int currentRound, int total, int score1, int score2, bool 
     if (file.is_open())
     {
         file << currentRound << " " << total << " " << score1 << " " << score2 << " " << vsCPU << endl;
-        file << name1 << endl;
+        file << player_1 << endl;
         file << name2 << endl;
         file.close();
     }
@@ -132,7 +132,7 @@ void LoadGameProgress()
         if (file >> savedRound >> totalRounds >> savedScore1 >> savedScore2 >> modeVSCPU)
         {
             file.ignore();
-            getline(file, name1);
+            getline(file, player_1);
             getline(file, name2);
             hasSavedGame = true;
         }
@@ -168,20 +168,20 @@ int DicePlayerTurn(string name)
 }
 
 // Play 1 vs 1
-void PlayGamePVP()
-{
+void PlayGamePVP() {
     modeVSCPU = false;
-    cout << "Enter Player 1's name: ";
-    getline(cin, name1);
-    cout << "Enter Player 2's name: ";
-    getline(cin, name2);
+
+    cout << "Enter the name of Player 2: ";
+    getline(cin, name2); // o cin >> name2 si preferís
+
     PlayGame();
 }
 
 // Play vs CPU
-void PlayGameCPU()
-{
+void PlayGameCPU() {
     modeVSCPU = true;
+    name2 = "CPU"; // ya fijo
+
     PlayGame();
 }
 
@@ -216,20 +216,20 @@ void PlayGame(bool resume)
     {
         cout << "\n========== ROUND " << i << " ==========" << endl;
         // Show the turn 1
-        cout << "\n--- Turn of " << name1 << " ---\n";
-        int p1 = DicePlayerTurn(name1);
+        cout << "\n--- Turn of " << player_1 << " ---\n";
+        int p1 = DicePlayerTurn(player_1);
         // Show the turn 2
         cout << "\n--- Turn of " << (modeVSCPU ? "CPU" : name2) << " ---\n";
         int p2 = DicePlayerTurn(modeVSCPU ? "CPU" : name2);
         // Round result
         cout << "\nRound result:\n";
-        cout << name1 << " Got " << p1 << " Points.\n";
+        cout << player_1 << " Got " << p1 << " Points.\n";
         cout << (modeVSCPU ? "CPU" : name2) << " Got " << p2 << " Points.\n";
 
         if (p1 > p2)
         {
             // Victory validation
-            cout << name1 << " Win the round!\n";
+            cout << player_1 << " Win the round!\n";
             savedScore1++;
         }
         else if (p2 > p1)
@@ -258,13 +258,13 @@ void PlayGame(bool resume)
 
     // Final score
     cout << "\n========== FINAL SCORE ==========\n";
-    cout << name1 << ": " << savedScore1 << " Points\n"; // Show Points
+    cout << player_1 << ": " << savedScore1 << " Points\n"; // Show Points
     cout << (modeVSCPU ? "CPU" : name2) << ": " << savedScore2 << " Points\n"; // Show Points
 
     // In case of a tie
     string winner = "Draw";
     if (savedScore1 > savedScore2)
-        winner = name1;
+        winner = player_1;
     else if (savedScore2 > savedScore1)
         winner = (modeVSCPU ? "CPU" : name2);
 
