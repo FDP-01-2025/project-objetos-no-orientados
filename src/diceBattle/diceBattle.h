@@ -223,8 +223,8 @@ void PlayGame(bool resume)
         int p2 = DicePlayerTurn(modeVSCPU ? "CPU" : name2);
         // Round result
         cout << "\nRound result:\n";
-        cout << player_1 << " Got " << p1 << " Points.\n";
-        cout << (modeVSCPU ? "CPU" : name2) << " Got " << p2 << " Points.\n";
+        cout << player_1 << " Got " << p1 << " Points.\n" << endl;
+        cout << (modeVSCPU ? "CPU" : name2) << " Got " << p2 << " Points.\n" << endl;
 
         if (p1 > p2)
         {
