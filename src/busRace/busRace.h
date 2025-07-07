@@ -18,46 +18,88 @@ const int GOAL = 50;
 extern string player_1;
 extern string player_2;
 
-//  Funcion Pausa para ver el resultado del juego
+// Pause function to see the game result
 void Stop()
 {
     cout << "\nPresiona ENTER para continuar...";
     cin.ignore();
-    cin.get(); // Espera a que el usuario presione Enter
+    cin.get(); // Wait for the user to press enter
 }
 
 // Function to play for one player vs CPU
 // Definition of the function to display the goal
 void ShowTrack(int Player_Main, int Player_CPU)
 {
-    // Definition for players
-    cout << "\n"
-         << player_1 << ": ";
-    for (int i = 0; i < Player_Main; i++)
-        cout << "-";
-    cout << "🚌";
+    const int name_width = 13; // Fixed width to avoid typing errors
 
-    cout << "\nCPU: ";
+    cout << left; // Align text to the left
+
+    // Player 1
+    // setw sets the width of the next output
+    cout << setw(name_width) << player_1 << ": |";
+    // Use for print player 1's route
+    for (int i = 0; i < Player_Main; i++)
+    {
+        cout << "-"; // Print player 1's progress
+    }
+    cout << "🚌"; // Player 1's car
+
+    // For loop to print player progress
+    for (int i = Player_Main; i < GOAL; i++)
+    {
+        cout << "."; // Print the rest of the track
+    }
+    cout << "|" << endl; // End of the track
+
+    // Player CPU
+    // setw sets the width of the next output
+    cout << setw(name_width) << "CPU" << ": |";
     for (int i = 0; i < Player_CPU; i++)
-        cout << "-";
-    cout << "🚌\n";
+    {
+        cout << "-"; // Print CPU progress
+    }
+    cout << "🚌"; // CPU's car
+
+    for (int i = Player_CPU; i < GOAL; i++)
+    {
+        cout << "."; // Print the rest of the track
+    }
+    cout << "|" << endl; // Endf of the track
 }
 
 void ShowTrack1vs1(int Player_Main, int Player_2)
 {
-    const int name_width = 10; // Ancho fijo para los errores
+    const int name_width = 12; // Fixed width to avoid typing errors
     // Definition for players
-    cout << "\n"
-         << setw(name_width) << player_1 << ": ";
+    cout << left; // Align text to the left
+    // Player 1
+    // setw sets the width of the next output
+    cout << setw(name_width) << player_1 << ": |";
+    // Use for print player 1's route
     for (int i = 0; i < Player_Main; i++)
-        cout << "-";
+    {
+        cout << "-"; // Print player 1's progress
+    }
     cout << "🚌";
+    for (int i = Player_Main; i < GOAL; i++)
+    {
+        cout << "."; // Print the rest of the track
+    }
+    cout << "|" << endl; // Endf of the track
 
-    cout << "\n"
-         << setw(name_width) << player_2 << ": ";
+    // print player 2's route
+    // setw sets the width of the next output
+    cout << setw(name_width) << player_2 << ": |";
     for (int i = 0; i < Player_2; i++)
-        cout << "-";
-    cout << "🚌\n";
+    {
+        cout << "-"; // Print player 2's progress
+    }
+    cout << "🚌";
+    for (int i = Player_2; i < GOAL; i++)
+    {
+        cout << "."; // Print the rest of the track
+    }
+    cout << "|" << endl; // Endf of the track
 }
 
 void IniciarCarreraCPU()
@@ -66,7 +108,7 @@ void IniciarCarreraCPU()
     int Player_CPU = 0;
     char tecla;
 
-    cout << "\n¡La carrera ha comenzado!\n";
+    cout << "\n¡The race has begun!\n";
     cout << "Presiona [X] para avanzar tu bus.\n";
 
     while (Player_Main < GOAL && Player_CPU < GOAL)
@@ -81,7 +123,7 @@ void IniciarCarreraCPU()
         }
 
         // Avance de la CPU (0 o 1 o 2 pasos)
-        Player_CPU += rand() % 2;
+        Player_CPU += rand() % +2;
 
         system("cls"); // Limpia la pantalla (Windows)
     }
@@ -112,7 +154,7 @@ void IniciarCarrera1vs1()
     int Player_2 = 0;
     char tecla;
 
-    cout << "\n¡La carrera ha comenzado!\n";
+    cout << "\n¡The race has begun!\n";
     cout << "Presiona [X] para avanzar tu bus 1.\n";
     cout << "Presiona [B] para avanzar tu bus 2.\n";
 
@@ -156,5 +198,11 @@ void IniciarCarrera1vs1()
     {
         cout << "Error" << endl;
     }
+}
+
+// show the rules of the game
+void ShowRules()
+{
+    cout << "\n--- Reglas del juego Bus";
 }
 #endif
