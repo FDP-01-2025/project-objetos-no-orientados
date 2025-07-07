@@ -79,46 +79,51 @@ inline void OnePlayerMode()
         string mixed = MixWord(word);
         string guess;
 
-        cout << "\n[Round " << i << "] :\nWord: " << mixed << "\n";
-        cout << player_1 << " Your guess: ";
+        cout <<"\n------------------- [Round " << i << "] -------------------\n";
+        cout << "\nWord: " << mixed << "\n";
+        cout <<"[ "<< player_1 <<" ]" <<" Your guess: ";
         cin >> guess;
 
         if (IsCorrect(guess, word))
         {
-            cout << "--Correct--\n";
+            cout << "\n--Correct--\n";
             ++player_points;
         }
         else
         {
-            cout << "--Incorrect. The word was: " << word << " --\n";
+            cout << "--Incorrect The word was: " << word << " --\n";
         }
 
         // CPU turn
-        cout << "\n[CPU Turn]\nCPU is guessing...\n";
+        string word_CPU = PickWord();
+        string mixed_CPU = MixWord(word_CPU);
+
+        cout << "\nWord: " << mixed_CPU << "\n";
+        cout << "[ CPU ] CPU is guessing... ";
         if (CpuGuessRight())
         {
-            cout << "CPU: " << word << " --Correcto--\n";
+            cout << ": " << word_CPU << "\n--Correcto--\n";
             ++cpu_points;
         }
         else
         {
-            cout << "--CPU: Wrong answer.--\n";
+            cout << "\n--CPU Wrong answer--\n";
         }
     }
-
-    cout << "\n[(Final Score)]:\n"<< player_1 << " " << player_points << "\nCPU: " << cpu_points << "\n";
+    cout <<"\n---------------- [(Final Score)] ----------------\n";
+    cout << player_1 << ": " << player_points << "\nCPU: " << cpu_points << "\n";
 
     if (player_points > cpu_points)
     {
-        cout << "--YOU WIN--\n";
+        cout <<"\n------------------ [YOU WIN] ------------------\n";
     }
     else if (cpu_points > player_points)
     {
-        cout << "--CPU WIN--\n";
+        cout <<"\n------------------- [CPU WIN] -------------------\n";
     }
     else
     {
-        cout << "--TIE--\n";
+        cout <<"\n--------------------- [TIE] ---------------------\n";
     }
     StopMessyWord();
 }
@@ -135,8 +140,9 @@ inline void TwoPlayerMode()
         string mixed_1 = MixWord(word_1);
         string guess_1;
 
-        cout << "\n[Round " << i << "]\nPlayer " << player_1 << " - word: " << mixed_1 << "\n";
-        cout << "Guess: ";
+        cout <<"\n------------------- [Round " << i << "] -------------------\n";
+        cout << "\nWord: " << mixed_1 << "\n";
+        cout <<"[ "<< player_1 <<" ]" <<" Your guess: ";
         cin >> guess_1;
 
         if (IsCorrect(guess_1, word_1))
@@ -146,7 +152,7 @@ inline void TwoPlayerMode()
         }
         else
         {
-            cout << "--Incorrect. The word was: " << word_1 << " --\n";
+            cout << "--Incorrect The word was: " << word_1 << " --\n";
         }
 
         // Player 2
@@ -154,8 +160,8 @@ inline void TwoPlayerMode()
         string mixed_2 = MixWord(word_2);
         string guess_2;
 
-        cout << "\n[Round " << i << "]\nPlayer " << player_2 << " - Word: " << mixed_2 << "\n";
-        cout << "Guess: ";
+        cout << "\nWord: " << mixed_2 << "\n";
+        cout <<"[ "<< player_2 <<" ]" <<" Your guess: ";
         cin >> guess_2;
 
         if (IsCorrect(guess_2, word_2))
@@ -165,25 +171,24 @@ inline void TwoPlayerMode()
         }
         else
         {
-            cout << "--Incorrect. The word was: " << word_2 << " --\n";
+            cout << "--Incorrect The word was: " << word_2 << " --\n";
         }
     }
-
-    cout << "\n[(Final Score)]:\n"
+        cout <<"\n---------------- [(Final Score)] ----------------\n"
          << player_1 << " : " << points_1 << "\n"
          << player_2 << " : " << points_2 << "\n";
 
     if (points_1 > points_2)
     {
-        cout << "--Player " << player_1 << " wins--";
+        cout <<"\n---------------- [YOU WIN "<<player_1<<"] ----------------\n";
     }
     else if (points_2 > points_1)
     {
-        cout << "--Player " << player_2 << " wins--";
+        cout <<"\n---------------- [YOU WIN "<<player_2<<"] ----------------\n";
     }
     else
     {
-        cout << "--TIE--\n";
+        cout <<"\n--------------------- [TIE] ---------------------\n";
     }
     StopMessyWord();
 }
