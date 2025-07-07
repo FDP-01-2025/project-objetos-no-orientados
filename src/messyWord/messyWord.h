@@ -3,140 +3,221 @@
 #ifndef JUEGO_H
 #define JUEGO_H
 
-#include <iostream>   // Entrada/salida estándar
-#include <string>     // Manejo de strings
-#include <vector>     // Uso de vectores
-#include <algorithm>  // random_shuffle
-#include <ctime>      // time(0)
-#include <cstdlib>    // rand(), srand()
+#include <iostream>  // Inout and output
+#include <string>    // Strings management
+#include <vector>    // Use of vectors
+#include <algorithm> // Shuffle
+#include <random>    // For random_device and default_random_engine
+#include <ctime>     // time(0)
+#include <cstdlib>   // rand(), srand()
 
 using namespace std;
 
 extern string player_1;
 extern string player_2;
 
-// Inicializa la semilla aleatoria (hace que genere las palabras aleatoriamente)
-inline void InicializarAleatorio() {
+// Start random numbers
+inline void StarRandom()
+{
     srand(static_cast<unsigned>(time(0)));
 }
 
-// Devuelve una lista de palabras
-inline vector<string> ObtenerListaPalabras() {
-    return {
-        "computadora", "pantalla", "raton", "teclado", "codigo", "programa", "tecnologia"
+// Return word list
+inline vector<string> GetWords()
+{
+     return {
+        "computer", "screen", "mouse", "keyboard", "code", "program", "technology", 
+        "monitor", "printer", "internet", "software", "hardware", "algorithm", "netwok",
+        "database", "security", "browser", "website", "password", "memory", "backup",
+        "download", "upload", "scanner", "desktop", "laptop", "server", "cloud", "router", "email"
     };
 }
 
-// Selecciona una palabra al azar
-inline string SeleccionarPalabraAzar() {
-    vector<string> palabras = ObtenerListaPalabras();
-    return palabras[rand() % palabras.size()];
+// Pick one random word
+inline string PickWord()
+{
+    vector<string> words = GetWords();
+    return words[rand() % words.size()];
 }
 
-// Mezcla una palabra
-inline string MezclarPalabra(const string& palabra) {
-    string mezclada = palabra;
-    //Random_shuffle sirve para la mezcla de palabras de diferente forma
-    random_shuffle(mezclada.begin(), mezclada.end());
-    return mezclada;
+inline string MixWord(const string &word)
+{
+    string mixed = word;
+    static random_device rd;              
+    static default_random_engine rng(rd()); 
+    shuffle(mixed.begin(), mixed.end(), rng); 
+    return mixed;
 }
 
-// Compara si es correcta
-inline bool Comparar(const string& intento, const string& correcta) {
-    return intento == correcta;
+// Check if guess is right
+inline bool IsCorrect(const string & guess, const string & correct)
+{
+    return guess == correct;
 }
 
-// Simula si la CPU acierta (50% de probabilidad)
-inline bool CpuRespondeBien() {
-    return rand() % 2 == 0; // 0 o 1 → 50% de probabilidad
+// 50% chance CPU is correct
+inline bool CpuGuessRight()
+{
+    return rand() % 2 == 0; // 0 o 1 → 50% probability
 }
 
-// Modo un jugador contra la CPU
-inline void ModoUnJugador() {
-    int rondas = 5, puntosJugador = 0, puntosCPU = 0;
+void StopMessyWord()
+{
+    cout << "\nPress ENTER to continue...";
+    cin.ignore();
+    cin.get(); // Waits for the user to pres ENTER
+}
 
-    for (int i = 1; i <= rondas; ++i) {
-        string palabra = SeleccionarPalabraAzar();
-        string mezclada = MezclarPalabra(palabra);
-        string intento;
+// One player mode: player vs CPU
+inline void OnePlayerMode()
+{
+    int rounds = 5, player_points = 0, cpu_points = 0;
 
-        cout << "\n[Ronda " << i << "] :\nPalabra desordenada: " << mezclada << "\n";
-        cout << player_1<< " Tu intento: ";
-        cin >> intento;
+    for (int i = 1; i <= rounds; ++i)
+    {
+        string word = PickWord();
+        string mixed = MixWord(word);
+        string guess;
 
-        if (Comparar(intento, palabra)) {
-            cout << "--Correcto--\n";
-            ++puntosJugador;
-        } else {
-            cout << "--Incorrecto. Era: " << palabra << " --\n";
+        cout << "\n[Round " << i << "] :\nWord: " << mixed << "\n";
+        cout << player_1 << " Your guess: ";
+        cin >> guess;
+
+        if (IsCorrect(guess, word))
+        {
+            cout << "--Correct--\n";
+            ++player_points;
+        }
+        else
+        {
+            cout << "--Incorrect. The word was: " << word << " --\n";
         }
 
-        // Turno de la CPU
-        cout << "\nCPU esta resolviendo...\n";
-        if (CpuRespondeBien()) {
-            cout << "CPU: " << palabra << " --Correcto--\n";
-            ++puntosCPU;
-        } else {
-            cout << "--CPU: respuesta incorrecta.--\n";
+        // CPU turn
+        cout << "\n[CPU Turn]\nCPU is guessing...\n";
+        if (CpuGuessRight())
+        {
+            cout << "CPU: " << word << " --Correcto--\n";
+            ++cpu_points;
         }
-    }
-
-    cout << "\n[(Puntaje Final)]:\n"<<player_1<<" "<< puntosJugador << "\nCPU: " << puntosCPU << "\n";
-
-    if (puntosJugador > puntosCPU)
-        cout << "--Ganaste contra la CPU--\n";
-    else if (puntosCPU > puntosJugador)
-        cout << "--La CPU gana esta vez.--\n";
-    else
-        cout << "--Empate--\n";
-}
-
-// Modo para dos jugadores 
-inline void ModoMultijugador() {
-    int rondas = 3, puntos1 = 0, puntos2 = 0;
-
-    for (int i = 1; i <= rondas; ++i) {
-        // Jugador 1
-        string palabra1 = SeleccionarPalabraAzar();
-        string mezclada1 = MezclarPalabra(palabra1);
-        string intento1;
-
-        cout << "\n[Ronda " << i << "]\nJugador "<<player_1<<" - Palabra: " << mezclada1 << "\n";
-        cout << "Intento: ";
-        cin >> intento1;
-
-        if (Comparar(intento1, palabra1)) {
-            cout << "--Correcto--\n";
-            ++puntos1;
-        } else {
-            cout << "--Incorrecto. Era: " << palabra1 << " --\n";
-        }
-
-        // Jugador 2
-        string palabra2 = SeleccionarPalabraAzar();
-        string mezclada2 = MezclarPalabra(palabra2);
-        string intento2;
-
-        cout << "\n[Ronda " << i << "]\nJugador "<<player_2<<" - Palabra: " << mezclada2 << "\n";
-        cout << "Intento: ";
-        cin >> intento2;
-
-        if (Comparar(intento2, palabra2)) {
-            cout << "--Correcto--\n";
-            ++puntos2;
-        } else {
-            cout << "--Incorrecto. Era: " << palabra2 << " --\n";
+        else
+        {
+            cout << "--CPU: Wrong answer.--\n";
         }
     }
 
-    cout << "\n[(Puntajes Finales)]:\n"<< player_1<< " : " << puntos1 << "\n"<< player_2 <<" : "<< puntos2 << "\n";
+    cout << "\n[(Final Score)]:\n"<< player_1 << " " << player_points << "\nCPU: " << cpu_points << "\n";
 
-    if (puntos1 > puntos2)
-        cout << "--Jugador "<< player_1 <<" gana--";
-    else if (puntos2 > puntos1)
-        cout << "--Jugador "<< player_2 <<" gana--";
+    if (player_points > cpu_points)
+    {
+        cout << "--YOU WIN--\n";
+    }
+    else if (cpu_points > player_points)
+    {
+        cout << "--CPU WIN--\n";
+    }
     else
-        cout << "--Empate--\n";
+    {
+        cout << "--TIE--\n";
+    }
+    StopMessyWord();
+}
+
+// Two player Mode: player vs player
+inline void TwoPlayerMode()
+{
+    int rounds = 3, points_1 = 0, points_2 = 0;
+
+    for (int i = 1; i <= rounds; ++i)
+    {
+        // Player 1
+        string word_1 = PickWord();
+        string mixed_1 = MixWord(word_1);
+        string guess_1;
+
+        cout << "\n[Round " << i << "]\nPlayer " << player_1 << " - word: " << mixed_1 << "\n";
+        cout << "Guess: ";
+        cin >> guess_1;
+
+        if (IsCorrect(guess_1, word_1))
+        {
+            cout << "--Correct--\n";
+            ++points_1;
+        }
+        else
+        {
+            cout << "--Incorrect. The word was: " << word_1 << " --\n";
+        }
+
+        // Player 2
+        string word_2 = PickWord();
+        string mixed_2 = MixWord(word_2);
+        string guess_2;
+
+        cout << "\n[Round " << i << "]\nPlayer " << player_2 << " - Word: " << mixed_2 << "\n";
+        cout << "Guess: ";
+        cin >> guess_2;
+
+        if (IsCorrect(guess_2, word_2))
+        {
+            cout << "--Correct--\n";
+            ++points_2;
+        }
+        else
+        {
+            cout << "--Incorrect. The word was: " << word_2 << " --\n";
+        }
+    }
+
+    cout << "\n[(Final Score)]:\n"
+         << player_1 << " : " << points_1 << "\n"
+         << player_2 << " : " << points_2 << "\n";
+
+    if (points_1 > points_2)
+    {
+        cout << "--Player " << player_1 << " wins--";
+    }
+    else if (points_2 > points_1)
+    {
+        cout << "--Player " << player_2 << " wins--";
+    }
+    else
+    {
+        cout << "--TIE--\n";
+    }
+    StopMessyWord();
+}
+
+inline void GameRules(){
+    {
+    cout << "\n=================================================\n";
+    cout << "                MESSY WORD GAME RULES            \n";
+    cout << "=================================================\n";
+    cout << "OBJECTIVE:\n";
+    cout << "- Guess scrambled words over several rounds.\n";
+    cout << "- The player with the most correct guesses wins.\n\n";
+    
+    cout << "GAME MODES:\n";
+    cout << "1) One Player Mode (1 vs CPU)\n";
+    cout << "   - 5 rounds.\n";
+    cout << "   - Player guesses the scrambled word.\n";
+    cout << "   - CPU guesses randomly with 50% chance of being correct.\n";
+    cout << "2) Two Player Mode (1 vs 1)\n";
+    cout << "   - 3 rounds.\n";
+    cout << "   - Each player gets a scrambled word and guesses.\n\n";
+    
+    cout << "SCORING SYSTEM:\n";
+    cout << "- +1 point per correct word guessed.\n";
+    cout << "- The player with the most points wins.\n\n";
+    
+    cout << "TIEBREAKERS:\n";
+    cout << "- If both players have the same score, the game ends in a tie.\n\n";
+    
+    cout << "CPU RULES:\n";
+    cout << "- CPU guesses each word with a 50% chance of correctness.\n";
+    cout << "=================================================\n";
+    Stop();
+}
 }
 
 #endif

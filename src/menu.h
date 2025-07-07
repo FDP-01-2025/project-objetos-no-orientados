@@ -11,7 +11,7 @@
 #include "busRace/busRace.h"
 #include "cardGame21/carGame.h"
 // #include "cardGame21/carGame.h"
-// #include "messyWord/messyWord.h"
+#include "messyWord/messyWord.h"
 // #include "diceBattle/diceBattle.h"
 
 // Libraries std for text message
@@ -98,9 +98,12 @@ void MessyWordMenu()
         {
         case 1:
             cout << "Play 1 vs CPU\n";
+            OnePlayerMode();
             break;
         case 2:
             cout << "Play 1 vs 1\n";
+            PlayerSecondName();
+            TwoPlayerMode();
             break;
         case 3:
             cout << "Save Game\n";
@@ -110,6 +113,7 @@ void MessyWordMenu()
             break;
         case 5:
             cout << "Game Rules\n";
+            GameRules();
             break;
         case 6:
             cout << "Exit\n";
