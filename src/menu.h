@@ -13,6 +13,7 @@
 // #include "cardGame21/carGame.h"
 #include "messyWord/messyWord.h"
 // #include "diceBattle/diceBattle.h"
+#include "diceBattle/diceBattle.h"
 
 // Libraries std for text message
 using namespace std;
@@ -113,12 +114,13 @@ void MessyWordMenu()
             break;
         case 5:
             cout << "Game Rules\n";
+            GameRules();
             break;
         case 6:
             cout << "Exit\n";
             break;
         default:
-            cout << "Opción inválida.\n";
+            cout << "Invalid option.\n";
             break;
         }
     } while (option != 6);
@@ -163,7 +165,7 @@ void BusRaceMenu()
             cout << "Exit\n";
             break;
         default:
-            cout << "Opción inválida.\n";
+            cout << "Invalid option.\n";
             break;
         }
     } while (option != 6);
@@ -206,7 +208,7 @@ void Poker21Menu()
             cout << "Exit\n";
             break;
         default:
-            cout << "Opción inválida.\n";
+            cout << "Invalid option.\n";
             break;
         }
     } while (option != 6);
@@ -221,7 +223,7 @@ void DiceBattleMenu()
         // Message for menu of the select game
         cout << "\n--- Welcome to Dice Battle " << player_1 << "---\n";
         cout << "--- Dice Battle Menu ---\n";
-        cout << "1. 1 vs CPU\n2. 1 vs 1\n3. Save Game \n4. Load Game\n5. Game Rules\n6. Exit\n";
+        cout << "1. 1 vs CPU\n2. 1 vs 1\n3. Load Game\n4. Game Rules\n5. Exit\n";
         // It is stored in the variable option
         cin >> option;
         // Prevents previous entries from affecting new readings
@@ -231,27 +233,29 @@ void DiceBattleMenu()
         {
         case 1:
             cout << "Play 1 vs CPU\n";
+            PlayGameCPU();
             break;
         case 2:
             cout << "Play 1 vs 1\n";
+            PlayGamePVP();
             break;
         case 3:
-            cout << "Save Game\n";
+            cout << "Load Game\n";
+            LoadGameProgress();
             break;
         case 4:
-            cout << "Load Game\n";
+            cout << "Game Rules\n";
+            ShowRules();
             break;
         case 5:
-            cout << "Game Rules\n";
-            break;
-        case 6:
             cout << "Exit\n";
+            cout << "Exit the game...\n";
             break;
         default:
-            cout << "Opción inválida.\n";
+            cout << "Invalid option.\n";
             break;
         }
-    } while (option != 6);
+    } while (option != 5);
 }
 /// Main Game menu 
 void ChooseGame()

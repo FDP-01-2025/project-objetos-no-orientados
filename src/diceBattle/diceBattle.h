@@ -1,173 +1,263 @@
-/*.h file where de functions to be used for the game will be written*/
-/*Archivo .h donde se escribiran las funciones a utilizar para el juego*/
-//Bookstores
 #ifndef DICE_BATTLE_H
 #define DICE_BATTLE_H
 
 #include <iostream>
-#include <windows.h> //Windows-exclusive library, we use it to allow the console to display accents
-#include <ctime> //Allows you to use time(0) to initialize random numbers with srand.
-#include <thread> //It gives us access to this_thread::sleep_for, to pause the program (animation)
-#include <chrono> //Defines time durations such as milliseconds, seconds, etc.
+#include <fstream>
+#include <windows.h>
+#include <ctime>
+#include <thread>
 #include <cstdlib>
+#include <vector>
 
 using namespace std;
-//Global variables
+
 string name1 = "Player 1";
 string name2 = "Player 2";
-bool modeVSCPU; // Indicates whether you chose to play against the CPU or not
+bool modeVSCPU;
 
-// Random number generator.
-int StartRandom()
+int savedRound = 1;
+int totalRounds = 0;
+int savedScore1 = 0;
+int savedScore2 = 0;
+bool hasSavedGame = false;
+
+// Wait for the key to be pressed
+void WaitForKey()
+{
+    cout << "\nPress Enter to continue...";
+    cin.ignore();
+    cin.get();
+}
+
+void PlayGame(bool resume = false);
+
+void StartRandom()
 {
     srand(time(0));
 }
 
-// The die is generated
 int ThrowDice()
 {
     return rand() % 6 + 1;
 }
 
-// Dice Options
-void ShowDice(int number)
+// Dice Design
+vector<string> GetDiceArt(int number)
 {
-    // A switch is used to choose which drawing to display.
     switch (number)
     {
     case 1:
-        cout << "+-----+\n";
-        cout << "|     |\n";
-        cout << "|  *  |\n";
-        cout << "|     |\n";
-        cout << "+-----+\n";
-        break;
+        return {"+-----+", "|     |", "|  *  |", "|     |", "+-----+"};
     case 2:
-        cout << "+-----+\n";
-        cout << "| *   |\n";
-        cout << "|     |\n";
-        cout << "|   * |\n";
-        cout << "+-----+\n";
-        break;
+        return {"+-----+", "| *   |", "|     |", "|   * |", "+-----+"};
     case 3:
-        cout << "+-----+\n";
-        cout << "| *   |\n";
-        cout << "|  *  |\n";
-        cout << "|   * |\n";
-        cout << "+-----+\n";
-        break;
+        return {"+-----+", "| *   |", "|  *  |", "|   * |", "+-----+"};
     case 4:
-        cout << "+-----+\n";
-        cout << "| * * |\n";
-        cout << "|     |\n";
-        cout << "| * * |\n";
-        cout << "+-----+\n";
-        break;
+        return {"+-----+", "| * * |", "|     |", "| * * |", "+-----+"};
     case 5:
-        cout << "+-----+\n";
-        cout << "| * * |\n";
-        cout << "|  *  |\n";
-        cout << "| * * |\n";
-        cout << "+-----+\n";
-        break;
+        return {"+-----+", "| * * |", "|  *  |", "| * * |", "+-----+"};
     case 6:
-        cout << "+-----+\n";
-        cout << "| * * |\n";
-        cout << "| * * |\n";
-        cout << "| * * |\n";
-        cout << "+-----+\n";
-        break;
+        return {"+-----+", "| * * |", "| * * |", "| * * |", "+-----+"};
+    default:
+        return {};
     }
 }
+
+// Show the dice
+void ShowTwoDice(int num1, int num2)
+{
+    vector<string> d1 = GetDiceArt(num1);
+    vector<string> d2 = GetDiceArt(num2);
+    for (size_t i = 0; i < d1.size(); ++i)
+    {
+        cout << d1[i] << "   " << d2[i] << endl;
+    }
+}
+
 // Dice animation
 void AnimationDice()
 {
     for (int i = 0; i < 5; ++i)
     {
-        int num = ThrowDice();
-// #ifdef is useful when the game is made for different operating systems
+        int num1 = ThrowDice();
+        int num2 = ThrowDice();
+
 #ifdef _WIN32
         system("cls");
 #else
         system("clear");
 #endif
+
         cout << "Rolling dice..." << endl;
-        ShowDice(num);
+        ShowTwoDice(num1, num2);
     }
 }
 
-//Function for the player's turn
-int PlayerTurn(string name){
-    cout << nombre << "Roll the dice..." << endl;
-    AnimationDice();
-    int d1 = ThrowDice();
-    int d2 = ThrowDice();
-    cout << name << "Got: " << endl;
-    ShowDice(d1);
-    ShowDice(d2);
-    int total = d1 + d2;
-    cout << "Total: " << total << "\n\n";
-    return 0;
-}
-//Function to play the round
-void PlayGame()
+// Save the result
+void SaveResult(string winner, int score1, int score2, bool vsCPU)
 {
-    int totalRounds;
-    cout << "¿How many rounds do you want to play?? ";
-    cin >> totalRounds;
-
-    int score1 = 0;
-    int score2 = 0;
-
-    for (int i = 1; i <= totalRounds; ++i)
+    ofstream file("games.txt", ios::app);
+    if (file.is_open())
     {
-        cout << "\n--- Round " << i << " ---" << endl;
-        int p1 = PlayerTurn(name1);
-        int p2 = PlayerTurn(modeVSCPU ? "CPU" : name2);
+        file << "Winner: " << winner << " | ";
+        file << name1 << ": " << score1 << " | ";
+        file << (vsCPU ? "CPU" : name2) << ": " << score2 << endl;
+        file.close();
+    }
+}
 
-        if (p1 > p2)
+void SaveGameProgress(int currentRound, int total, int score1, int score2, bool vsCPU)
+{
+    ofstream file("savegame.txt");
+    if (file.is_open())
+    {
+        file << currentRound << " " << total << " " << score1 << " " << score2 << " " << vsCPU << endl;
+        file << name1 << endl;
+        file << name2 << endl;
+        file.close();
+    }
+}
+
+void LoadGameProgress()
+{
+    ifstream file("savegame.txt");
+    if (file.is_open())
+    {
+        if (file >> savedRound >> totalRounds >> savedScore1 >> savedScore2 >> modeVSCPU)
         {
-            cout << name1 << " ¡win the round!" << endl;
-            score1++;
-        }
-        else if (p2 > p1)
-        {
-            cout << (modeVSCPU ? "CPU" : name2) << " ¡win the round!" << endl;
-            score2++;
+            file.ignore();
+            getline(file, name1);
+            getline(file, name2);
+            hasSavedGame = true;
         }
         else
         {
-            cout << "¡Draw!" << endl;
+            hasSavedGame = false; // invalid or corrupt file
         }
+        file.close();
     }
-
-    cout << "\n--- Final score ---" << endl;
-    cout << name1 << ": " << score1 << " points" << endl;
-    cout << (modeVSCPU ? "CPU" : name2) << ": " << score2 << " points" << endl;
-
-    if (score1 > score2)
-        cout << name1 << " ¡win the game!" << endl;
-    else if (score2 > score1)
-        cout << (modeVSCPU ? "CPU" : name2) << " ¡win the game!" << endl;
     else
-        cout << "¡The game ended in a tie!" << endl;
-}
-//Choose game mode
-void SelectMode(){
-    int option;
-    cout << "Select the game mode: " << endl;
-    cout << "1. Player vs Player" << endl;
-    cout << "2. Player vs CPU" << endl;
-    cin >> option;
-    if(option == 2){
-        modeVSCPU = true;
-        name2 = "CPU";
-    }
-    else{
-        modeVSCPU = false;
-        cout << "Enter the name of the second player: " << endl;
-        cin >> name2;
+    {
+        hasSavedGame = false; // file does not exist
     }
 }
 
+int DicePlayerTurn(string name)
+{
+    int d1 = ThrowDice();
+    int d2 = ThrowDice();
+
+    cout << name << " rolls the dice..." << endl;
+
+    // We show fake animation
+    AnimationDice();
+
+    // We show real circulation
+    cout << name << " got:" << endl;
+    ShowTwoDice(d1, d2);
+    int total = d1 + d2;
+    cout << "Total: " << total << "\n\n";
+    return total;
+}
+
+// Play 1 vs 1
+void PlayGamePVP()
+{
+    modeVSCPU = false;
+    cout << "Enter Player 1's name: ";
+    getline(cin, name1);
+    cout << "Enter Player 2's name: ";
+    getline(cin, name2);
+    PlayGame();
+}
+
+// Play vs CPU
+void PlayGameCPU()
+{
+    modeVSCPU = true;
+    PlayGame();
+}
+
+// Rules of the game
+void ShowRules()
+{
+    cout << "\n========= RULES OF THE GAME =========\n";
+    cout << "1. The game is for 2 players (can be Player vs Player or Player vs CPU).\n";
+    cout << "2. Each player rolls two 6-sided dice per round.\n";
+    cout << "3. Both players must roll their dice for the round to be valid.\n";
+    cout << "4. The player who gets the highest sum in the round wins 1 point.\n";
+    cout << "5. The player who accumulates the most points at the end of all rounds wins the game..\n";
+    cout << "6. Players choose how many rounds they wish to play before starting.\n";
+    cout << "====================================\n";
+    WaitForKey(); // Pause for reading
+}
+
+// Start of game
+void PlayGame(bool resume)
+{
+    if (!resume)
+    {
+        cout << "How many rounds do you want to play? ";
+        cin >> totalRounds;
+        cin.ignore();
+        savedRound = 1;
+        savedScore1 = 0;
+        savedScore2 = 0;
+    }
+
+    for (int i = savedRound; i <= totalRounds; ++i)
+    {
+        cout << "\n========== ROUND " << i << " ==========" << endl;
+
+        cout << "\n--- Turn of " << name1 << " ---\n";
+        int p1 = DicePlayerTurn(name1);
+
+        cout << "\n--- Turn of " << (modeVSCPU ? "CPU" : name2) << " ---\n";
+        int p2 = PlayerTurn(modeVSCPU ? "CPU" : name2);
+
+        cout << "\nRound result:\n";
+        cout << name1 << " Got " << p1 << " Points.\n";
+        cout << (modeVSCPU ? "CPU" : name2) << " Got " << p2 << " Points.\n";
+
+        if (p1 > p2)
+        {
+            cout << name1 << " Win the round!\n";
+            savedScore1++;
+        }
+        else if (p2 > p1)
+        {
+            cout << (modeVSCPU ? "CPU" : name2) << " Win the round!\n";
+            savedScore2++;
+        }
+        else
+        {
+            cout << "¡Tie in the round!\n";
+        }
+
+        if (i < totalRounds)
+        {
+            SaveGameProgress(i + 1, totalRounds, savedScore1, savedScore2, modeVSCPU);
+        }
+        else
+        {
+            remove("savegame.txt");
+        }
+
+        WaitForKey();
+    }
+
+    cout << "\n========== FINAL SCORE ==========\n";
+    cout << name1 << ": " << savedScore1 << " Points\n";
+    cout << (modeVSCPU ? "CPU" : name2) << ": " << savedScore2 << " Points\n";
+
+    string winner = "Draw";
+    if (savedScore1 > savedScore2)
+        winner = name1;
+    else if (savedScore2 > savedScore1)
+        winner = (modeVSCPU ? "CPU" : name2);
+
+    cout << "\nFinal Winner: " << winner << "\n";
+    SaveResult(winner, savedScore1, savedScore2, modeVSCPU);
+    WaitForKey();
+}
 #endif
