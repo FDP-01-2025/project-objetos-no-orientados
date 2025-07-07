@@ -205,5 +205,16 @@ void Play21Cpu()
     }
 }
 
+void GameRules21()
+{
+    cout << "\n========= RULES OF THE GAME =========\n";
+    cout << "1. The game is for 2 players (can be Player vs Player or Player vs CPU).\n";
+    cout << "2. The goal is to reach 21 points or come close without going over. If you go over 21, you automatically lose.\n";
+    cout << "3. Each player takes turns receiving a card.\n";
+    cout << "4. Each players decide if want more cards or no.\n";
+    cout << "5. If both reach 21 it's a tie.\n";
+    cout << "====================================\n";
+}
+
 
 #endif
