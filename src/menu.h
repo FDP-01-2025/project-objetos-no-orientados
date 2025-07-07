@@ -44,10 +44,26 @@ void PlayersName()
             cin.clear(); // Clears the error state.
             option = 2;  // Forces the loop to repeat.
         }
+
         system("cls"); // Clears the terminal (Windows)
 
     } while (option != 1);
     // If the option is different from 1 it is repeated
+
+    // Luego de validar el nombre, se guarda el nombre en el txt
+    ofstream file("item.txt");
+    // Si el archivo esta abierto...
+    if (file.is_open())
+    {
+
+        file << "Player 1: " << player_1 << endl;
+        file << player_1 << endl; // Write the name to the file
+        file.close();             // Close the file
+    }
+    else
+    {
+        cout << "Error opening file." << endl;
+    }
 }
 /// Direct definition for second player name
 void PlayerSecondName()
@@ -76,6 +92,17 @@ void PlayerSecondName()
         system("cls"); // Clears the terminal (Windows)
     } while (option != 1);
     // If the option is different from 1 it is repeated
+
+    ofstream file("item.txt");
+    if (file.is_open())
+    {
+        file << "Player 1: " << player_1 << endl;
+        file.close(); // Close the file
+    }
+    else
+    {
+        cout << "Error opening file." << endl;
+    }
 }
 /// Game menu, function to select the game mode
 void MessyWordMenu()
@@ -143,12 +170,12 @@ void BusRaceMenu()
         {
         case 1:
             cout << "Play 1 vs CPU\n";
-            IniciarCarreraCPU();
+            StartRaceCPU();
             break;
         case 2:
             cout << "Play 1 vs 1\n";
             PlayerSecondName();
-            IniciarCarrera1vs1();
+            StartRace1vs1();
             break;
         case 3:
             cout << "New Game\n";
@@ -158,7 +185,7 @@ void BusRaceMenu()
             break;
         case 5:
             cout << "Game Rules\n";
-            ShowRulesBus();
+            ShowRulesBus(); // Show the rules of the game
             break;
         case 6:
             cout << "Exit\n";
@@ -256,7 +283,7 @@ void DiceBattleMenu()
         }
     } while (option != 5);
 }
-/// Main Game menu 
+/// Main Game menu
 void ChooseGame()
 {
     // Definition of the variable for the game to choose
@@ -290,7 +317,7 @@ void ChooseGame()
             MessyWordMenu();
             break;
         case 4:
-        // Game menu function
+            // Game menu function
             BusRaceMenu();
             break;
         case 5:

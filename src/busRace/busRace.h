@@ -8,14 +8,15 @@
 #include <string>  // For name format
 #include <conio.h> // use for _getch()
 #include <cstdlib> // Use for rand()
-
 using namespace std;
 
 // Definition of goal size
 const int GOAL = 50;
-// Save score 
-const int SCORE_P1 = 0;
-const int SCORE_P2 = 0;
+// Save score
+int SCORE_P1 = 0;
+int SCORE_P2 = 0;
+int SCORE_CPU = 0;
+
 // Declaration of global variables
 extern string player_1;
 extern string player_2;
@@ -44,7 +45,7 @@ void ShowTrack(int Player_Main, int Player_CPU)
     {
         cout << "-"; // Print player 1's progress
     }
-    cout << "🚌"; // Player 1's car
+    cout << "R44"; // Player 1's car
 
     // For loop to print player progress
     for (int i = Player_Main; i < GOAL; i++)
@@ -60,7 +61,7 @@ void ShowTrack(int Player_Main, int Player_CPU)
     {
         cout << "-"; // Print CPU progress
     }
-    cout << "🚌"; // CPU's car
+    cout << "R-8"; // CPU's car
 
     for (int i = Player_CPU; i < GOAL; i++)
     {
@@ -104,106 +105,111 @@ void ShowTrack1vs1(int Player_Main, int Player_2)
     cout << "|" << endl; // Endf of the track
 }
 
-void IniciarCarreraCPU()
+void StartRaceCPU()
 {
+    // Players are initialized to zero
     int Player_Main = 0;
     int Player_CPU = 0;
-    char tecla;
+    char key;
 
     cout << "\n¡The race has begun!\n";
-    cout << "Presiona [X] para avanzar tu bus.\n";
+    cout << "Press [X] to advance your bus.\n";
 
     while (Player_Main < GOAL && Player_CPU < GOAL)
     {
         ShowTrack(Player_Main, Player_CPU);
 
-        // Avance del jugador
-        tecla = _getch(); // espera a que se presione una tecla
-        if (tecla == 'x' || tecla == 'X')
+        // Player Preview
+        key = _getch(); // Wait for me to press the key
+        if (key == 'x' || key == 'X')
         {
             Player_Main += (rand() % 2) + 1; // 1 o 2
+            // The CPU player position is added randomly
         }
 
-        // Avance de la CPU (0 o 1 o 2 pasos)
-       Player_CPU += (rand() % 2) + 1;  // 1 o 2
+        // CPU advance(1 or 2)
+        Player_CPU += (rand() % 2) + 1; // 1 o 2
 
-        system("cls"); // Limpia la pantalla (Windows)
+        system("cls"); // Clean the terminal (Windows)
     }
 
+    // The track is presented
     ShowTrack(Player_Main, Player_CPU);
 
-    // Resultado
+    // Result
     if (Player_Main >= GOAL && Player_CPU >= GOAL)
     {
-        cout << "\n¡Empate!\n";
-        Stop();
+        cout << "\n¡Draw!\n";
+        Stop(); // Pause for reading
     }
     else if (Player_Main >= GOAL)
     {
-        cout << "\n¡Felicidades, GANASTE!\n";
+        cout << "\n¡Congratulations, player " << player_1 << " won!\n";
         Stop();
     }
     else
     {
-        cout << "\nLa CPU ha ganado...\n";
+        cout << "\nCPU WON...\n";
         Stop();
     }
 }
 
-void IniciarCarrera1vs1()
-{
+void StartRace1vs1()
+{ // Players are initialized to zero
     int Player_Main = 0;
     int Player_2 = 0;
-    char tecla;
+    char key;
 
     cout << "\n¡The race has begun!\n";
-    cout << "Presiona [X] para avanzar tu bus 1.\n";
-    cout << "Presiona [B] para avanzar tu bus 2.\n";
+    cout << "Press [X] to advance your bus 1.\n";
+    cout << "Press [B] to advance your bus 2.\n";
 
     while (Player_Main < GOAL && Player_2 < GOAL)
     {
         ShowTrack1vs1(Player_Main, Player_2);
 
-        // Avance del jugador
-        tecla = _getch(); // espera a que se presione una tecla
-        if (tecla == 'x' || tecla == 'X')
+        // Player Preview
+        key = _getch(); // Wait for me to press the key
+        if (key == 'x' || key == 'X')
         {
             Player_Main++;
+            // The position of the player when pressing the key is added
         }
-        else if (tecla == 'b' || tecla == 'B')
+        else if (key == 'b' || key == 'B')
         {
-            Player_2++;
+            Player_2++; // The position of the player when pressing the key is added
         }
 
-        system("cls"); // Limpia la terminal (Windows)
+        system("cls"); // Clean the terminal (Windows)
     }
-
+    // The track is presented
     ShowTrack1vs1(Player_Main, Player_2);
 
-    // Resultado
+    // Result
     if (Player_Main >= GOAL && Player_2 >= GOAL)
     {
-        cout << "\n¡Empate!\n";
-        //SCORE_P1++;
-//SCORE_P2++;
+        cout << "\n¡Draw!\n";
+        SCORE_P1++;
+        SCORE_P2++;
         Stop();
     }
     else if (Player_Main >= GOAL)
     {
-        cout << "\n¡Felicidades, GANASTE!\n";
+        cout << "\n¡Congratulations, player " << player_1 << " won!\n";
+        SCORE_P1++;
         Stop();
     }
     else if (Player_2 >= GOAL)
     {
-        cout << "\nGano el segundo...\n";
+        cout << "\n¡Congratulations, player " << player_2 << " won!\n";
+        SCORE_P2++;
         Stop();
     }
     else
     {
-        cout << "Error" << endl;
+        cout << "Error, lost game" << endl;
     }
 }
-
 // show the rules of the game
 void ShowRulesBus()
 {
