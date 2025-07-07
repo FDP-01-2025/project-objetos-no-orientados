@@ -29,11 +29,11 @@ void PlayersName()
     do
     {
         // Name of the main player, request
-        cout << "Main player name 1: ";
+        cout << "\nMain player name 1: ";
         getline(cin, player_1);
 
         // Option for name validation
-        cout << "confirm name? \n1.Yes \n2.No" << endl;
+        cout << "\nconfirm name? \n1.Yes \n2.No" << endl;
         cin >> option;
 
         // Clears the input buffer to avoid errors on the next read.
@@ -74,11 +74,11 @@ void PlayerSecondName()
     do
     {
         // Name of the main player, request
-        cout << "Name player 2: ";
+        cout << "\nName player 2: ";
         getline(cin, player_2);
 
         // Option for validation name
-        cout << "confirm name? \n1.Yes \n2.No" << endl;
+        cout << "\nconfirm name? \n1.Yes \n2.No" << endl;
         cin >> option;
 
         // Clears the input buffer to avoid errors on the next read.
@@ -112,9 +112,11 @@ void MessyWordMenu()
     do
     {
         // Message for menu of the select game
-        cout << "\n--- Welcome to Messy Word " << player_1 << "---\n";
-        cout << "--- Messy Word Menu ---\n";
-        cout << "1. 1 vs CPU\n2. 1 vs 1\n3. Save Game \n4. Load Game\n5. Game Rules\n6. Exit\n";
+        cout << "\n=================================================\n";
+        cout << "             WELCOME TO MESSY WORD "<<player_1<<"\n";
+        cout << "=================================================\n";
+        cout << "---------------- Messy Word Menu ----------------\n";
+        cout << "\n1. 1 vs CPU\n2. 1 vs 1\n3. Save Game \n4. Load Game\n5. Game Rules\n6. Exit\n";
         // It is stored in the variable option
         cin >> option;
         // Prevents previous entries from affecting new readings
@@ -123,11 +125,11 @@ void MessyWordMenu()
         switch (option)
         {
         case 1:
-            cout << "Play 1 vs CPU\n";
+            cout <<"\n----------------- Play 1 vs CPU -----------------\n";
             OnePlayerMode();
             break;
         case 2:
-            cout << "Play 1 vs 1\n";
+            cout <<"\n------------------ Play 1 vs 1 ------------------\n";
             PlayerSecondName();
             TwoPlayerMode();
             break;
@@ -158,9 +160,11 @@ void BusRaceMenu()
     do
     {
         // Message for menu of the select game
-        cout << "\n--- Welcome to Bus Race " << player_1 << "---\n";
-        cout << "--- Bus Race Menu ---\n";
-        cout << "1. 1 vs CPU\n2. 1 vs 1\n3. New Game \n4. Load Game\n5. Game Rules\n6. Exit\n";
+        cout << "\n=================================================\n";
+        cout << "             WELCOME TO BUS RACE "<<player_1<<"\n";
+        cout << "=================================================\n";
+        cout << "----------------- Bus Race Menu -----------------\n";
+        cout << "\n1. 1 vs CPU\n2. 1 vs 1\n3. New Game \n4. Load Game\n5. Game Rules\n6. Exit\n";
         // It is stored in the variable option
         cin >> option;
         // Prevents previous entries from affecting new readings
@@ -169,11 +173,11 @@ void BusRaceMenu()
         switch (option)
         {
         case 1:
-            cout << "Play 1 vs CPU\n";
+            cout <<"\n----------------- Play 1 vs CPU -----------------\n";
             StartRaceCPU();
             break;
         case 2:
-            cout << "Play 1 vs 1\n";
+            cout <<"\n------------------ Play 1 vs 1 ------------------\n";
             PlayerSecondName();
             StartRace1vs1();
             break;
@@ -204,9 +208,11 @@ void Poker21Menu()
     do
     {
         // Message for menu of the select game
-        cout << "\n--- Welcome to 21 Poker " << player_1 << "---\n";
-        cout << "--- 21 Poker Menu Menu ---\n";
-        cout << "1. 1 vs CPU\n2. 1 vs 1\n3. Save Game \n4. Load Game\n5. Game Rules\n6. Exit\n";
+        cout << "\n=================================================\n";
+        cout << "             WELCOME TO 21 POKER "<<player_1<<"\n";
+        cout << "=================================================\n";
+        cout << "----------------- 21 Poker Menu -----------------\n";
+        cout << "\n1. 1 vs CPU\n2. 1 vs 1\n3. Save Game \n4. Load Game\n5. Game Rules\n6. Exit\n";
         // It is stored in the variable option
         cin >> option;
         // Prevents previous entries from affecting new readings
@@ -215,9 +221,11 @@ void Poker21Menu()
         switch (option)
         {
         case 1:
+            cout <<"\n----------------- Play 1 vs CPU -----------------\n";
             Play21Cpu();
             break;
         case 2:
+            cout <<"\n------------------ Play 1 vs 1 ------------------\n";
             PlayerSecondName();
             Play21();
             break;
@@ -247,9 +255,11 @@ void DiceBattleMenu()
     do
     {
         // Message for menu of the select game
-        cout << "\n--- Welcome to Dice Battle " << player_1 << "---\n";
-        cout << "--- Dice Battle Menu ---\n";
-        cout << "1. 1 vs CPU\n2. 1 vs 1\n3. Load Game\n4. Game Rules\n5. Exit\n";
+        cout << "\n=================================================\n";
+        cout << "            WELCOME TO DICE BATTLE "<<player_1<<"\n";
+        cout << "=================================================\n";
+        cout << "--------------- Dice Battle Menu ----------------\n";
+        cout << "\n1. 1 vs CPU\n2. 1 vs 1\n3. Load Game\n4. Game Rules\n5. Exit\n";
         // It is stored in the variable option
         cin >> option;
         // Prevents previous entries from affecting new readings
@@ -258,11 +268,11 @@ void DiceBattleMenu()
         switch (option)
         {
         case 1:
-            cout << "Play 1 vs CPU\n";
+            cout <<"\n----------------- Play 1 vs CPU -----------------\n";
             PlayGameCPU();
             break;
         case 2:
-            cout << "Play 1 vs 1\n";
+            cout <<"\n------------------ Play 1 vs 1 ------------------\n";
             PlayGamePVP();
             break;
         case 3:
@@ -291,10 +301,13 @@ void ChooseGame()
     // Do while loop to choose the desired game or exit
     do
     {
-        cout << "\n----- Welcome to Royale Casino " << player_1 << " -----\n";
-        cout << "----- Select the game you want to run: -----\n";
+        cout << "\n=================================================\n";
+        cout << "           WELCOME TO ROYAL CASINO "<<player_1<<"\n";
+        cout << "=================================================\n";
+        cout << "         Select the game you want to run:\n";
+        cout << "_________________________________________________\n";
         // Messages about available games
-        cout << "1.Dice Battle \n2.21 POKER\n3.Crazy word\n4.Bus Race\n5.Leave The game" << endl;
+        cout << "\n1.Dice Battle \n2.21 POKER\n3.Crazy word\n4.Bus Race\n5.Leave The game" << endl;
         cin >> option;
         // Prevents previous entries from affecting new readings
         cin.ignore(numeric_limits<::streamsize>::max(), '\n');
