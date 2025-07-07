@@ -8,6 +8,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <fstream>
 using namespace std;
 
 // Declaration of global variables
@@ -41,6 +42,26 @@ int PlayerTurn(string name)
     } while (desition == 'y' || desition == 'Y');
 
     return total;
+}
+
+// function to save the match
+void SaveMatch21(const string& player1, int score1, const string& player2, int score2)
+{
+    ofstream archivo("score_21.txt", ios::app);
+
+    if (archivo.is_open())
+    {
+        archivo << "Resultado de la partida:" << endl;
+        archivo << player1 << ": " << score1 << endl;
+        archivo << player2 << ": " << score2 << endl;
+        archivo << "-------------------------" << endl;
+        archivo.close();
+        cout << "Scores save in score_21.txt\n";
+    }
+    else
+    {
+        cout << " Error in save progress." << endl;
+    }
 }
 
 //Principal function for Poker 21 game 
@@ -151,6 +172,8 @@ void Play21()
         cout << player_2 << " You got more points." << endl;
     else
         cout << "Draw" << endl;
+
+    SaveMatch21(player_1, total_player_1, player_2, total_player_2);
 }
 
 void Play21Cpu()
@@ -203,6 +226,7 @@ void Play21Cpu()
     {
         cout << "CPU wins!" << endl;
     }
+    SaveMatch21(player_1, playerTotal, "CPU", cpuTotal);
 }
 
 void GameRules21()

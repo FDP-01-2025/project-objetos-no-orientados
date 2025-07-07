@@ -1,2 +1,1 @@
-Player 1: Francisco
-Francisco
+Player 1: rodas

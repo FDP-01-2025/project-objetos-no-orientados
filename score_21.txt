@@ -1,0 +1,8 @@
+Resultado de la partida:
+rodas: 23
+diego: 28
+-------------------------
+Resultado de la partida:
+rodas: 22
+CPU: 19
+-------------------------

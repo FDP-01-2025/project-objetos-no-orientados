@@ -212,7 +212,7 @@ void Poker21Menu()
         cout << "             WELCOME TO 21 POKER "<<player_1<<"\n";
         cout << "=================================================\n";
         cout << "----------------- 21 Poker Menu -----------------\n";
-        cout << "\n1. 1 vs CPU\n2. 1 vs 1\n3. Save Game \n4. Load Game\n5. Game Rules\n6. Exit\n";
+        cout << "\n1. 1 vs CPU\n2. 1 vs 1\n3. Game Rules\n4. Exit\n";
         // It is stored in the variable option
         cin >> option;
         // Prevents previous entries from affecting new readings
@@ -230,22 +230,16 @@ void Poker21Menu()
             Play21();
             break;
         case 3:
-            cout << "Save Game\n";
-            break;
-        case 4:
-            cout << "Load Game\n";
-            break;
-        case 5:
             GameRules21();
             break;
-        case 6:
+        case 4:
             cout << "Exit\n";
             break;
         default:
             cout << "Invalid option.\n";
             break;
         }
-    } while (option != 6);
+    } while (option != 4);
 }
 /// Game menu, function to select the game mode
 void DiceBattleMenu()
