@@ -100,7 +100,7 @@ void AnimationDice()
 // Save the result
 void SaveResult(string winner, int score1, int score2, bool vsCPU)
 {
-    ofstream file("games.txt", ios::app);
+    ofstream file("diceBattle.txt", ios::app);
     if (file.is_open())
     {
         file << "Winner: " << winner << " | ";
@@ -215,29 +215,32 @@ void PlayGame(bool resume)
     for (int i = savedRound; i <= totalRounds; ++i)
     {
         cout << "\n========== ROUND " << i << " ==========" << endl;
-
+        // Show the turn 1
         cout << "\n--- Turn of " << name1 << " ---\n";
         int p1 = DicePlayerTurn(name1);
-
+        // Show the turn 2
         cout << "\n--- Turn of " << (modeVSCPU ? "CPU" : name2) << " ---\n";
         int p2 = DicePlayerTurn(modeVSCPU ? "CPU" : name2);
-
+        // Round result
         cout << "\nRound result:\n";
         cout << name1 << " Got " << p1 << " Points.\n";
         cout << (modeVSCPU ? "CPU" : name2) << " Got " << p2 << " Points.\n";
 
         if (p1 > p2)
         {
+            // Victory validation
             cout << name1 << " Win the round!\n";
             savedScore1++;
         }
         else if (p2 > p1)
         {
+            // Victory validation
             cout << (modeVSCPU ? "CPU" : name2) << " Win the round!\n";
             savedScore2++;
         }
         else
         {
+            // Draw validation
             cout << "¡Tie in the round!\n";
         }
 
@@ -253,16 +256,19 @@ void PlayGame(bool resume)
         WaitForKey();
     }
 
+    // Final score
     cout << "\n========== FINAL SCORE ==========\n";
-    cout << name1 << ": " << savedScore1 << " Points\n";
-    cout << (modeVSCPU ? "CPU" : name2) << ": " << savedScore2 << " Points\n";
+    cout << name1 << ": " << savedScore1 << " Points\n"; // Show Points
+    cout << (modeVSCPU ? "CPU" : name2) << ": " << savedScore2 << " Points\n"; // Show Points
 
+    // In case of a tie
     string winner = "Draw";
     if (savedScore1 > savedScore2)
         winner = name1;
     else if (savedScore2 > savedScore1)
         winner = (modeVSCPU ? "CPU" : name2);
 
+    //Final winner
     cout << "\nFinal Winner: " << winner << "\n";
     SaveResult(winner, savedScore1, savedScore2, modeVSCPU);
     WaitForKey();
