@@ -10,9 +10,7 @@
 // Include the content of the games, the address of the files is called
 #include "busRace/busRace.h"
 #include "cardGame21/carGame.h"
-// #include "cardGame21/carGame.h"
 #include "messyWord/messyWord.h"
-// #include "diceBattle/diceBattle.h"
 #include "diceBattle/diceBattle.h"
 
 // Libraries std for text message
@@ -135,7 +133,7 @@ void BusRaceMenu()
         // Message for menu of the select game
         cout << "\n--- Welcome to Bus Race " << player_1 << "---\n";
         cout << "--- Bus Race Menu ---\n";
-        cout << "1. 1 vs CPU\n2. 1 vs 1\n3. Save Game \n4. Load Game\n5. Game Rules\n6. Exit\n";
+        cout << "1. 1 vs CPU\n2. 1 vs 1\n3. New Game \n4. Load Game\n5. Game Rules\n6. Exit\n";
         // It is stored in the variable option
         cin >> option;
         // Prevents previous entries from affecting new readings
@@ -153,13 +151,14 @@ void BusRaceMenu()
             IniciarCarrera1vs1();
             break;
         case 3:
-            cout << "Save Game\n";
+            cout << "New Game\n";
             break;
         case 4:
             cout << "Load Game\n";
             break;
         case 5:
             cout << "Game Rules\n";
+            ShowRulesBus();
             break;
         case 6:
             cout << "Exit\n";
