@@ -13,7 +13,9 @@ using namespace std;
 
 // Definition of goal size
 const int GOAL = 50;
-
+// Save score 
+const int SCORE_P1 = 0;
+const int SCORE_P2 = 0;
 // Declaration of global variables
 extern string player_1;
 extern string player_2;
@@ -119,11 +121,11 @@ void IniciarCarreraCPU()
         tecla = _getch(); // espera a que se presione una tecla
         if (tecla == 'x' || tecla == 'X')
         {
-            Player_Main++;
+            Player_Main += (rand() % 2) + 1; // 1 o 2
         }
 
         // Avance de la CPU (0 o 1 o 2 pasos)
-        Player_CPU += rand() % +2;
+       Player_CPU += (rand() % 2) + 1;  // 1 o 2
 
         system("cls"); // Limpia la pantalla (Windows)
     }
@@ -182,6 +184,8 @@ void IniciarCarrera1vs1()
     if (Player_Main >= GOAL && Player_2 >= GOAL)
     {
         cout << "\n¡Empate!\n";
+        //SCORE_P1++;
+//SCORE_P2++;
         Stop();
     }
     else if (Player_Main >= GOAL)
@@ -201,8 +205,18 @@ void IniciarCarrera1vs1()
 }
 
 // show the rules of the game
-void ShowRules()
+void ShowRulesBus()
 {
-    cout << "\n--- Reglas del juego Bus";
+    cout << "\n========= RULES OF THE GAME =========\n";
+    cout << "The rules of the Bus Race game are as follows:\n";
+    cout << "- The game is for two players: the player and the computer (or two players).\n";
+    cout << "- Each bus advances by pressing an assigned key.\n";
+    cout << "- Player vs. CPU, the player key is 'X'\n";
+    cout << "- Player vs. Player 2, Player 1's key is 'X' and Player 2's key is 'K'\n";
+    cout << "- A goal is set for all players to reach, and each player must arrive before their opponent.\n";
+    cout << "- The bus that reaches the finish line wins..\n";
+    cout << "====================================\n";
+    Stop(); // Pause for reading
 }
+
 #endif
