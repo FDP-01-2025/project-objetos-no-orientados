@@ -201,7 +201,7 @@ void Poker21Menu()
             cout << "Load Game\n";
             break;
         case 5:
-            cout << "Game Rules\n";
+            GameRules21();
             break;
         case 6:
             cout << "Exit\n";
