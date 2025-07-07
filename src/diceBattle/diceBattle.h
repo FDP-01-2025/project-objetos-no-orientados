@@ -13,15 +13,15 @@
 using namespace std;
 
 // Variables
-string name1 = "Player 1";
-string name2 = "Player 2";
+string name1 = "Player 1"; // Name player 1
+string name2 = "Player 2"; // Name player 2
 bool modeVSCPU;
 
-int savedRound = 1;
-int totalRounds = 0;
-int savedScore1 = 0;
-int savedScore2 = 0;
-bool hasSavedGame = false;
+int savedRound = 1; // Current round of the game
+int totalRounds = 0; // Total rounds to play
+int savedScore1 = 0; // Player 1 saves score
+int savedScore2 = 0; // Player 2 saves score
+bool hasSavedGame = false; // Find out if there is a game to load
 
 // Wait for the key to be pressed
 void WaitForKey()
@@ -33,11 +33,13 @@ void WaitForKey()
 
 void PlayGame(bool resume = false);
 
+// Generates a random roll
 void StartRandom()
 {
     srand(time(0));
 }
 
+// Dice faces
 int ThrowDice()
 {
     return rand() % 6 + 1;
