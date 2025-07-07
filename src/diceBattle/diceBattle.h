@@ -220,7 +220,7 @@ void PlayGame(bool resume)
         int p1 = DicePlayerTurn(name1);
 
         cout << "\n--- Turn of " << (modeVSCPU ? "CPU" : name2) << " ---\n";
-        int p2 = PlayerTurn(modeVSCPU ? "CPU" : name2);
+        int p2 = DicePlayerTurn(modeVSCPU ? "CPU" : name2);
 
         cout << "\nRound result:\n";
         cout << name1 << " Got " << p1 << " Points.\n";
