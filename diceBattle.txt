@@ -1,1 +1,2 @@
 Winner: rodas | rodas: 1 | CPU: 0
+Winner: rodas | rodas: 2 | CPU: 0

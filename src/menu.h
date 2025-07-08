@@ -331,6 +331,14 @@ void DiceBattleMenu()
         case 3:
             cout << "Load Game\n";
             LoadGameProgress();
+            if (hasSavedGame)
+            {
+                PlayGame(true);
+            }
+            else
+            {
+                cout << "No saved game found.\n";
+            }
             break;
         case 4:
             cout << "Game Rules\n";
