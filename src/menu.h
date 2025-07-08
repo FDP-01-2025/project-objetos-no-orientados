@@ -213,7 +213,7 @@ void BusRaceMenu()
         cout << "             WELCOME TO BUS RACE " << player_1 << "\n";
         cout << "=================================================\n";
         cout << "----------------- Bus Race Menu -----------------\n";
-        cout << "\n1. 1 vs CPU\n2. 1 vs 1\n3. New Game \n4. Load Game\n5. Game Rules\n6. Exit\n";
+        cout << "\n1. 1 vs CPU\n2. 1 vs 1\n3. New Game \n4. Scores\n5. Game Rules\n6. Exit\n";
         // It is stored in the variable option
         cin >> option;
         // Prevents previous entries from affecting new readings
@@ -237,9 +237,10 @@ void BusRaceMenu()
             break;
         case 3:
             cout << "New Game\n";
+            ResetScores(); // Reset scores to start a new game
             break;
         case 4:
-            cout << "Load Game\n";
+            ShowScores(); // Show the scores of the game
             break;
         case 5:
             cout << "Game Rules\n";
