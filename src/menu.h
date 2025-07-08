@@ -20,7 +20,7 @@ using namespace std;
 extern string player_1;
 extern string player_2;
 
-/// funcion para almancenar los nombres de los jugadores en un txt
+// Function to store the players' names in a txt file
 void SavePlayers()
 {
     ofstream file("item.txt");
@@ -70,7 +70,7 @@ void PlayersName()
     } while (option != 1);
     // If the option is different from 1 it is repeated
 
-    // funcion para almacenar los nombres
+    // Function to store the names
     SavePlayers();
 }
 /// Direct definition for second player name

@@ -1,25 +1,24 @@
 #include <iostream>
-#include "src/menu.h" // Se manda a llamar el archivo .h que contiene todas las funciones
+#include "src/menu.h" // The .h file that contains all the functions is called
 
 using namespace std;
 /*Main structure of the project, in this file only the functions are called
  *In this file only .h files will be called
  */
 
-// Definiicion de variables globales
+// Definition of global variables
 string player_1;
 string player_2;
 
-// funcion principal
+// Main function
 int main()
 {
     cout << "---Royale Casino---" << endl;
-    /// Mandar a llamar a la funcion
+    // Call the function 
     LoadPlayerNames();
-    // Muestra los nombres guardados en las variables globales
+    // Displays the names stored in the global variables  
     cout << "\n----- Players ---\n";
     cout << "Player 1: " << player_1 << std::endl;
-
-    // Mandar a llamar la funcion de escoger juego
+    // Call the function to choose the game  
     ChooseGame();
 }
