@@ -13,11 +13,11 @@ string player_2;
 // Main function
 int main()
 {
-    cout << "---Royale Casino---" << endl;
+    cout << "\n----------------- Ryoyal Casino -----------------" << endl;
     // Call the function 
     LoadPlayerNames();
     // Displays the names stored in the global variables  
-    cout << "\n----- Players ---\n";
+    cout << "\n------------------- Players ---------------------\n";
     cout << "Player 1: " << player_1 << std::endl;
     // Call the function to choose the game  
     ChooseGame();

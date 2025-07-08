@@ -114,6 +114,23 @@ inline void ShowSavedScores()
     StopMessyWord(); // Pause until the user presses ENTER
 }
 
+inline void ResetMessyWordScores()
+{
+    ofstream file("score_MessyWord.txt",ios::trunc); // Truncate borra todo
+
+    if (file.is_open())
+    {
+        file.close();
+        cout << "\nAll match records have been deleted successfully.\n";
+    }
+    else
+    {
+        cout << "\nError: could not open score file to delete contents.\n";
+    }
+
+    StopMessyWord(); // Espera ENTER
+}
+
 // One player mode: player vs CPU
 inline void OnePlayerMode()
 {

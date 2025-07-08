@@ -159,7 +159,7 @@ void MessyWordMenu()
         cout << "             WELCOME TO MESSY WORD " << player_1 << "\n";
         cout << "=================================================\n";
         cout << "---------------- Messy Word Menu ----------------\n";
-        cout << "\n1. 1 vs CPU\n2. 1 vs 1\n3. Save Game \n4. Load Game\n5. Game Rules\n6. Exit\n";
+        cout << "\n1. 1 vs CPU\n2. 1 vs 1\n3. Reset Scores \n4. Show Scores\n5. Game Rules\n6. Exit\n";
         // It is stored in the variable option
         cin >> option;
         // Prevents previous entries from affecting new readings
@@ -181,18 +181,19 @@ void MessyWordMenu()
             TwoPlayerMode();
             break;
         case 3:
-            cout << "Save Game\n";
+            cout << "\n------------------ Reset Scores -----------------\n";
+            ResetMessyWordScores();
             break;
         case 4:
-            cout << "Load Game\n";
+            cout << "\n------------------ Show Scores ------------------\n";
             ShowSavedScores();
             break;
         case 5:
-            cout << "Game Rules\n";
+            cout << "\n------------------ Game Rules ------------------\n";
             GameRules();
             break;
         case 6:
-            cout << "Exit\n";
+            cout << "\n------------------ Exit ------------------\n";
             break;
         default:
             cout << "Invalid option.\n";
