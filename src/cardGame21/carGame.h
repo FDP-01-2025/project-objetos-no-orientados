@@ -85,7 +85,7 @@ void Play21()
     {
         if (turn_1)
         {
-            cout << "\n" << player_1 << "'s turn:" << endl;
+            cout << "\n================= " << player_1 << "'s TURN =================\n";
             cout << player_1 << ", your total is: " << total_player_1 << endl;
             cout << "Do you want a card? (y/n): ";
             cin >> decision;
@@ -118,7 +118,7 @@ void Play21()
 
         if (turn_2)
         {
-            cout << "\n" << player_2 << "'s turn:" << endl;
+            cout << "\n================= " << player_2 << "'s TURN =================\n";
             cout << player_2 << ", your total is: " << total_player_2 << endl;
             cout << "Do you want a card? (y/n): ";
             cin >> decision;
@@ -151,25 +151,25 @@ void Play21()
     }
 
     //Final results
-    cout << "Result" << endl;
-    cout << player_1 << ": " << total_player_1 << endl;
-    cout << player_2 << ": " << total_player_2 << endl;
+    cout << "\n================= " << "Result" << " ================= " << endl;
+    cout << "         " << player_1 << ": " << total_player_1  << " === " << player_2 << ": " << total_player_2  << "        " << endl ;
+    
 
     //Validation if and else if to comprovate the winner
     if (total_player_1 > 21 && total_player_2 > 21)
-        cout << "Both of them lose! maybe next one :( ." << endl;
+        cout << "=== " << "Both of them lose! maybe next one " << "=== \n" << endl;
     else if (total_player_1 == 21)
-        cout << player_1 << " You won, you got 21." << endl;
+        cout << "===== " << player_1 << " You won, you got 21." << "===== \n" << endl;
     else if (total_player_2 == 21)
-        cout << player_2 << " You won, you got 21." << endl;
+        cout << "===== " << player_2 << " You won, you got 21." << "===== \n" << endl;
     else if (total_player_1 > 21)
-        cout << player_2 << " You won, " << player_1 << " got more than 21." << endl;
+        cout << "=== " << player_2 << " You won, " << player_1 << " got more than 21." << "=== \n" << endl;
     else if (total_player_2 > 21)
-        cout << player_1 << " You won, " << player_2 << " got more than 21." << endl;
+        cout << "=== " << player_1 << " You won, " << player_2 << " got more than 21." << "=== \n" << endl;
     else if (total_player_1 > total_player_2)
-        cout << player_1 << " You got more points." << endl;
+        cout << "===== " << player_1 << " You got more points." << "===== \n" << endl;
     else if (total_player_2 > total_player_1)
-        cout << player_2 << " You got more points." << endl;
+        cout << "===== " << player_2 << " You got more points." << "===== \n" << endl;
     else
         cout << "Draw" << endl;
 

@@ -105,7 +105,7 @@ void PlayerSecondName()
     SavePlayers();
 }
 
-// Function to load names if they exist
+/// Function to load names if they exist
 void LoadPlayerNames()
 {
     ifstream file("item.txt");
@@ -128,7 +128,7 @@ void LoadPlayerNames()
 
         // read player 2 name
         getline(file, line);
-        if(!line.empty() && line.find(":") != string::npos)
+        if (!line.empty() && line.find(":") != string::npos)
         {
             player_2 = line.substr(line.find(":") + 2);
         }
@@ -173,7 +173,11 @@ void MessyWordMenu()
             break;
         case 2:
             cout << "\n------------------ Play 1 vs 1 ------------------\n";
-            PlayerSecondName();
+            // if dont exist player_2 name, request it
+            if (player_2.empty())
+            {
+                PlayerSecondName(); // If player 2 name is empty, request it
+            }
             TwoPlayerMode();
             break;
         case 3:
@@ -222,7 +226,7 @@ void BusRaceMenu()
         case 2:
             cout << "\n------------------ Play 1 vs 1 ------------------\n";
             // if dont exist player_2 name, request it
-            if(player_2.empty())
+            if (player_2.empty())
             {
                 PlayerSecondName(); // If player 2 name is empty, request it
             }
@@ -273,7 +277,11 @@ void Poker21Menu()
             break;
         case 2:
             cout << "\n------------------ Play 1 vs 1 ------------------\n";
-            PlayerSecondName();
+            // if dont exist player_2 name, request it
+            if (player_2.empty())
+            {
+                PlayerSecondName(); // If player 2 name is empty, request it
+            }
             Play21();
             break;
         case 3:
