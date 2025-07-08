@@ -88,4 +88,7 @@ Para Funciones
 PascalCase
 
 //Ejecutar el proyecto
-g++ -o main .\main.cpp .\src\menuV.cpp 
+g++ -o main .\main.cpp .\src\menuV.cpp
+
+// Documentación del juego
+https://docs.google.com/document/d/1CWJojjZBc_CnhPwqzDGf7RQKyhY8t8aZMUvLFtJp8-8/edit?usp=sharing
