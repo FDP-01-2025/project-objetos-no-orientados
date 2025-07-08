@@ -218,6 +218,7 @@ void BusRaceMenu()
         cin >> option;
         // Prevents previous entries from affecting new readings
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        LoadScores(); // Load scores from file
         // Switch case for select de Game mode
         switch (option)
         {

@@ -4,7 +4,7 @@
 #define BUSRACE_H
 #include <iomanip>  // Library that allows you to align text with a fixed width
 #include <iostream> //Avoid errors if the user enters more data than expected
-#include <iostream>
+#include <fstream>
 #include <string>  // For name format
 #include <conio.h> // use for _getch()
 #include <cstdlib> // Use for rand()
@@ -14,6 +14,7 @@ using namespace std;
 const int GOAL = 50;
 // Save score
 int SCORE_P1 = 0;
+int SCORE_P1_J2 = 0;
 int SCORE_P2 = 0;
 int SCORE_CPU = 0;
 
@@ -27,6 +28,97 @@ void Stop()
     cout << "\nPress ENTER to continue...";
     cin.ignore();
     cin.get(); // Wait for the user to press enter
+}
+
+// Save player's scores to a file
+void SaveScores()
+{
+    // open a new file to save the scores
+    ofstream file("./src/busRace/BusRace.txt", ios::app);
+
+    if (file.is_open())
+    {
+        file << "========= SCORES =========\n";
+        file << "\n========= Game: " << player_1 << " vs " << player_2 << " =========\n";
+        file << "Player 1: " << player_1 << " - Score: " << SCORE_P1_J2 << "\n";
+        file << "Player 2: " << player_2 << " - Score: " << SCORE_P2 << "\n";
+        file << "\n========= Game: CPU" << " vs " << player_1 << " =========\n";
+        file << "CPU - Score: " << SCORE_CPU << "\n";
+        file << "Player 1: " << player_1 << " - Score: " << SCORE_P1 << "\n";
+        file.close();
+    }
+    else
+    {
+        cout << "Error saving scores.\n";
+    }
+}
+
+void LoadScores()
+{
+    ifstream file("./src/busRace/BusRace.txt"); // Open the file to read scores
+    string line;                                // Variable to read each line
+
+    // Local variables to store the last found
+    int lastP1 = 0, lastP1_J2 = 0, lastP2 = 0, lastCPU = 0;
+    bool isCPU = false;
+
+    if (file.is_open()) // Check if the file opened successfully
+    {
+        while (getline(file, line)) // Iterates and reads the file line by line
+        {
+            // Detects if the game was against the CPU
+            if (line.find("Game:") != string::npos && line.find("CPU") != string::npos)
+            {
+                isCPU = true;
+            }
+            // Detects if the match was between two human players
+            else if (line.find("Game:") != string::npos && line.find("vs") != string::npos)
+            {
+                if (line.find("CPU") == string::npos)
+                    isCPU = false;
+            }
+
+            // Processes player scores
+            if (line.find("Player 1:") != string::npos)
+            {
+                size_t pos = line.find("Score: ");
+                if (pos != string::npos)
+                {
+                    if (isCPU)
+                        lastP1 = stoi(line.substr(pos + 7)); // recover position
+                    else
+                        lastP1_J2 = stoi(line.substr(pos + 7)); // recover position
+                }
+            }
+            else if (!isCPU && line.find("Player 2:") != string::npos)
+            {
+                size_t pos = line.find("Score: ");
+                if (pos != string::npos)
+                {
+                    lastP2 = stoi(line.substr(pos + 7)); // recover position
+                }
+            }
+            else if (line.find("CPU - Score:") != string::npos)
+            {
+                size_t pos = line.find(": ");
+                if (pos != string::npos)
+                {
+                    lastCPU = stoi(line.substr(pos + 2)); // recover position
+                }
+            }
+        }
+        file.close();
+
+        // the last found is assigned
+        SCORE_P1 = lastP1;
+        SCORE_P1_J2 = lastP1_J2;
+        SCORE_P2 = lastP2;
+        SCORE_CPU = lastCPU;
+    }
+    else
+    {
+        cout << "No previous scores found.\n";
+    }
 }
 
 // Function to play for one player vs CPU
@@ -72,6 +164,7 @@ void ShowTrack(int Player_Main, int Player_CPU)
 
 void ShowTrack1vs1(int Player_Main, int Player_2)
 {
+
     const int name_width = 12; // Fixed width to avoid typing errors
     // Definition for players
     cout << left; // Align text to the left
@@ -83,7 +176,7 @@ void ShowTrack1vs1(int Player_Main, int Player_2)
     {
         cout << "-"; // Print player 1's progress
     }
-    cout << "🚌";
+    cout << "R44";
     for (int i = Player_Main; i < GOAL; i++)
     {
         cout << "."; // Print the rest of the track
@@ -97,7 +190,7 @@ void ShowTrack1vs1(int Player_Main, int Player_2)
     {
         cout << "-"; // Print player 2's progress
     }
-    cout << "🚌";
+    cout << "R-8";
     for (int i = Player_2; i < GOAL; i++)
     {
         cout << "."; // Print the rest of the track
@@ -107,6 +200,7 @@ void ShowTrack1vs1(int Player_Main, int Player_2)
 
 void StartRaceCPU()
 {
+
     // Players are initialized to zero
     int Player_Main = 0;
     int Player_CPU = 0;
@@ -144,22 +238,32 @@ void StartRaceCPU()
     if (Player_Main >= GOAL && Player_CPU >= GOAL)
     {
         cout << "\n¡Draw!\n";
-        Stop(); // Pause for reading
+        SCORE_P1++;
+        SCORE_CPU++;
     }
     else if (Player_Main >= GOAL)
     {
         cout << "\n¡Congratulations, player " << player_1 << " won!\n";
-        Stop();
+        SCORE_P1++;
     }
     else
     {
         cout << "\nCPU WON...\n";
-        Stop();
+        SCORE_CPU++;
     }
+
+    cout << endl;
+    cout << "========= SCORES =========\n";
+    cout << "Player 1: " << SCORE_P1 << endl;
+    cout << "CPU: " << SCORE_CPU << endl;
+    cout << endl;
+    SaveScores(); // Save scores to file
+    Stop();
 }
 
 void StartRace1vs1()
-{ // Players are initialized to zero
+{
+    // Players are initialized to zero
     int Player_Main = 0;
     int Player_2 = 0;
     char key;
@@ -194,26 +298,35 @@ void StartRace1vs1()
     if (Player_Main >= GOAL && Player_2 >= GOAL)
     {
         cout << "\n¡Draw!\n";
-        SCORE_P1++;
+        SCORE_P1_J2++;
         SCORE_P2++;
-        Stop();
+        // Stop();
     }
     else if (Player_Main >= GOAL)
     {
         cout << "\n¡Congratulations, player " << player_1 << " won!\n";
-        SCORE_P1++;
-        Stop();
+        SCORE_P1_J2++;
+
+        // Stop();
     }
     else if (Player_2 >= GOAL)
     {
         cout << "\n¡Congratulations, player " << player_2 << " won!\n";
         SCORE_P2++;
-        Stop();
+
+        // Stop();
     }
     else
     {
         cout << "Error, lost game" << endl;
     }
+    cout << endl;
+    cout << "========= SCORES =========\n";
+    cout << "Player 1: " << SCORE_P1_J2 << endl;
+    cout << "Player 2: " << SCORE_P2 << endl;
+    cout << endl;
+    SaveScores(); // Save scores to file
+    Stop();
 }
 // show the rules of the game
 void ShowRulesBus()
@@ -229,5 +342,4 @@ void ShowRulesBus()
     cout << "====================================\n";
     Stop(); // Pause for reading
 }
-
 #endif
