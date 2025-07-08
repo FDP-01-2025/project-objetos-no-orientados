@@ -61,6 +61,26 @@ inline bool CpuGuessRight()
     return rand() % 2 == 0; // 0 o 1 → 50% probability
 }
 
+// function to save the match
+void SaveMaessyWord(const string& player_1, int score1, const string& player_2, int score2)
+{
+    ofstream archivo("score_MessyWord.txt", ios::app);
+
+    if (archivo.is_open())
+    {
+        archivo << "Resultado de la partida:" << endl;
+        archivo << player_1 << ": " << score1 << endl;
+        archivo << player_2 << ": " << score2 << endl;
+        archivo << "-------------------------" << endl;
+        archivo.close();
+        cout << "Scores save in score_MessyWord.txt\n";
+    }
+    else
+    {
+        cout << " Error in save progress." << endl;
+    }
+}
+
 void StopMessyWord()
 {
     cout << "\nPress ENTER to continue...";
@@ -125,6 +145,7 @@ inline void OnePlayerMode()
     {
         cout <<"\n--------------------- [TIE] ---------------------\n";
     }
+    SaveMatch21(player_1, player_points, "CPU", cpu_points);
     StopMessyWord();
 }
 
@@ -190,6 +211,7 @@ inline void TwoPlayerMode()
     {
         cout <<"\n--------------------- [TIE] ---------------------\n";
     }
+    SaveMatch21(player_1, points_1, player_2, points_2);
     StopMessyWord();
 }
 
