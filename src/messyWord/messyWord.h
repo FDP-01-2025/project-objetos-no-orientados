@@ -94,7 +94,7 @@ inline void ShowSavedScores()
 {
     ifstream file("score_MessyWord.txt");
 
-    cout << "\n=============== MATCH HISTORY ===============\n";
+    cout << "\n================= MATCH HISTORY =================\n";
 
     if (file.is_open())
     {
@@ -110,7 +110,7 @@ inline void ShowSavedScores()
         cout << "Could not open the score file or it doesn't exist yet.\n";
     }
 
-    cout << "=============================================\n";
+    cout << "=================================================\n";
     StopMessyWord(); // Pause until the user presses ENTER
 }
 
@@ -260,32 +260,16 @@ inline void TwoPlayerMode()
 
 inline void GameRules(){
     {
-    cout << "\n=================================================\n";
-    cout << "                MESSY WORD GAME RULES            \n";
-    cout << "=================================================\n";
-    cout << "OBJECTIVE:\n";
-    cout << "- Guess scrambled words over several rounds.\n";
-    cout << "- The player with the most correct guesses wins.\n\n";
-    
-    cout << "GAME MODES:\n";
-    cout << "1) One Player Mode (1 vs CPU)\n";
-    cout << "   - 5 rounds.\n";
-    cout << "   - Player guesses the scrambled word.\n";
-    cout << "   - CPU guesses randomly with 50% chance of being correct.\n";
-    cout << "2) Two Player Mode (1 vs 1)\n";
-    cout << "   - 3 rounds.\n";
-    cout << "   - Each player gets a scrambled word and guesses.\n\n";
-    
-    cout << "SCORING SYSTEM:\n";
-    cout << "- +1 point per correct word guessed.\n";
-    cout << "- The player with the most points wins.\n\n";
-    
-    cout << "TIEBREAKERS:\n";
-    cout << "- If both players have the same score, the game ends in a tie.\n\n";
-    
-    cout << "CPU RULES:\n";
-    cout << "- CPU guesses each word with a 50% chance of correctness.\n";
-    cout << "=================================================\n";
+    cout << "========= RULES OF THE GAME =========\n";
+    cout << "The rules of the Messy Word game are as follows:\n";
+    cout << "- The objective is to guess scrambled words over several rounds.\n";
+    cout << "- The player with the most correct guesses wins the game.\n";
+    cout << "- Game Modes:\n";
+    cout << "  * One Player: 5 rounds against the CPU. CPU has a 50% chance to guess correctly.\n";
+    cout << "  * Two Players: 3 rounds. Each player guesses their own scrambled word.\n";
+    cout << "- Each correct guess earns 1 point.\n";
+    cout << "- If scores are tied, the game ends in a tie.\n";
+    cout << "====================================\n";
     Stop();
 }
 }

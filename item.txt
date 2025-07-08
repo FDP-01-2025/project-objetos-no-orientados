@@ -1,5 +1,1 @@
 -------- Players Names --------
-
-Player 1: rodas
-
-Player 2: josue

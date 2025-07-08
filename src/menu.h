@@ -27,7 +27,7 @@ void SavePlayers()
 
     if (file.is_open())
     {
-        file << "-------- Players Names --------\n"
+        file << "---------------- Players Names ------------\n"
              << endl; // Header
         file << "Player 1: " << player_1 << endl;
         file << "\nPlayer 2: " << player_2 << endl; // Write the name to the file
@@ -193,7 +193,7 @@ void MessyWordMenu()
             GameRules();
             break;
         case 6:
-            cout << "\n------------------ Exit ------------------\n";
+            cout << "\n-------------------- Exit ----------------------\n";
             break;
         default:
             cout << "Invalid option.\n";
@@ -236,18 +236,19 @@ void BusRaceMenu()
             StartRace1vs1();
             break;
         case 3:
-            cout << "New Game\n";
+            cout << "\n------------------- New Game --------------------\n";
             ResetScores(); // Reset scores to start a new game
             break;
         case 4:
+            cout << "\n------------------ Show Scores ------------------\n";
             ShowScores(); // Show the scores of the game
             break;
         case 5:
-            cout << "Game Rules\n";
+            cout << "\n------------------ Game Rules ------------------\n";
             ShowRulesBus(); // Show the rules of the game
             break;
         case 6:
-            cout << "Exit\n";
+            cout << "\n---------------------- Exit --------------------\n";
             break;
         default:
             cout << "Invalid option.\n";
@@ -289,10 +290,11 @@ void Poker21Menu()
             Play21();
             break;
         case 3:
+            cout << "\n------------------ Game Rules ------------------\n";
             GameRules21();
             break;
         case 4:
-            cout << "Exit\n";
+            cout << "\n---------------------- Exit --------------------\n";
             break;
         default:
             cout << "Invalid option.\n";
@@ -333,7 +335,7 @@ void DiceBattleMenu()
             PlayGamePVP();
             break;
         case 3:
-            cout << "Load Game\n";
+            cout << "\n------------------ Load Game ------------------\n";
             LoadGameProgress();
             if (hasSavedGame)
             {
@@ -345,11 +347,11 @@ void DiceBattleMenu()
             }
             break;
         case 4:
-            cout << "Game Rules\n";
+            cout << "\n------------------ Game Rules ------------------\n";
             ShowRules();
             break;
         case 5:
-            cout << "Exit\n";
+            cout << "\n---------------------- Exit --------------------\n";
             cout << "Exit the game...\n";
             break;
         default:
