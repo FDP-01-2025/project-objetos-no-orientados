@@ -1,0 +1,8 @@
+Resultado de la partida:
+rodas: 24
+josue: 23
+-------------------------
+Resultado de la partida:
+rodas: 27
+josue: 23
+-------------------------
