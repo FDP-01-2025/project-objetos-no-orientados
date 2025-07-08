@@ -322,6 +322,10 @@ void DiceBattleMenu()
             break;
         case 2:
             cout << "\n------------------ Play 1 vs 1 ------------------\n";
+            if (player_2.empty())
+            {
+                PlayerSecondName(); // If player 2 name is empty, request it
+            }
             PlayGamePVP();
             break;
         case 3:
