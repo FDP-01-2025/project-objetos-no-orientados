@@ -30,6 +30,30 @@ void Stop()
     cin.get(); // Wait for the user to press enter
 }
 
+// Show scores function
+void ShowScores()
+{
+    cout << "\n========= SCORES =========\n";
+    // It is validated if there are no scores
+    if (SCORE_CPU == 0 && SCORE_P1 == 0 && SCORE_P1_J2 == 0 && SCORE_P2 == 0)
+    {
+        cout << "\nThere are no scores recorded.\n";
+    }
+    else
+    {
+        // Score for CPU vs Player 1
+        cout << "\n--------- CPU vs " << player_1 << " ---------n";
+        cout << "\nCPU: " << SCORE_CPU << endl;
+        cout << player_1 << ": " << SCORE_P1 << endl;
+        cout << endl;
+        // Score for Player 1 vs Player 2
+        cout << "\n--------- " << player_1 << " vs " << player_2 << " ---------\n";
+        cout << player_1 << ": " << SCORE_P1_J2 << endl;
+        cout << player_2 << ": " << SCORE_P2 << endl;
+    }
+    Stop(); // Pause for reading
+}
+
 // Save player's scores to a file
 void SaveScores()
 {
@@ -75,7 +99,7 @@ void LoadScores()
             else if (line.find("Game:") != string::npos && line.find("vs") != string::npos)
             {
                 if (line.find("CPU") == string::npos)
-                    isCPU = false;
+                    isCPU = false; // Mark that it is NOT against the CPU
             }
 
             // Processes player scores
@@ -119,6 +143,27 @@ void LoadScores()
     {
         cout << "No previous scores found.\n";
     }
+}
+// Function to reset scores and delete data
+void ResetScores()
+{
+    // ios::trunc empty the data
+    ofstream file("./src/busRace/BusRace.txt", ios::trunc);
+    if (file.is_open())
+    {
+        file << "";
+        file.close();
+    }
+    else
+    {
+        cout << "error when deleting content\n";
+    }
+
+    // También reinicia tus variables globales
+    SCORE_P1 = 0;
+    SCORE_P1_J2 = 0;
+    SCORE_P2 = 0;
+    SCORE_CPU = 0;
 }
 
 // Function to play for one player vs CPU
@@ -254,7 +299,7 @@ void StartRaceCPU()
 
     cout << endl;
     cout << "========= SCORES =========\n";
-    cout << "Player 1: " << SCORE_P1 << endl;
+    cout << player_1 << ": " << SCORE_P1 << endl;
     cout << "CPU: " << SCORE_CPU << endl;
     cout << endl;
     SaveScores(); // Save scores to file
@@ -322,8 +367,8 @@ void StartRace1vs1()
     }
     cout << endl;
     cout << "========= SCORES =========\n";
-    cout << "Player 1: " << SCORE_P1_J2 << endl;
-    cout << "Player 2: " << SCORE_P2 << endl;
+    cout << player_1 << ": " << SCORE_P1_J2 << endl;
+    cout << player_2 << ": " << SCORE_P2 << endl;
     cout << endl;
     SaveScores(); // Save scores to file
     Stop();
