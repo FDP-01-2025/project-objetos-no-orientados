@@ -78,24 +78,24 @@ void Play21()
 
     //Variable to alternate shifts
     bool turn_1 = true, turn_2 = true;
-    char decision;
+    char decition;
 
     //While to alternate shifts
     while (turn_1 || turn_2)
     {
-        if (turn_1)
+        if (turn_1) // Turn for player 1 
         {
             cout << "\n================= " << player_1 << "'s TURN =================\n";
             cout << player_1 << ", your total is: " << total_player_1 << endl;
-            cout << "Do you want a card? (y/n): ";
-            cin >> decision;
+            cout << "Do you want a card? (y/n): "; 
+            cin >> decition;
 
-            if (decision == 'y' || decision == 'Y')
+            if (decition == 'y' || decition == 'Y')
             {
-                int card = RamdomCard();
+                int card = RamdomCard(); // The player get another card
                 cout << "You got a card: " << card << endl;
                 total_player_1 += card;
-                cout << "New total: " << total_player_1 << endl;
+                cout << "New total: " << total_player_1 << endl; // New total cards for the player
                 
                 if (total_player_1 >= 21)
                 {
@@ -116,19 +116,19 @@ void Play21()
             }
         }
 
-        if (turn_2)
+        if (turn_2) // Turn for player 2
         {
             cout << "\n================= " << player_2 << "'s TURN =================\n";
             cout << player_2 << ", your total is: " << total_player_2 << endl;
             cout << "Do you want a card? (y/n): ";
-            cin >> decision;
+            cin >> decition;
 
-            if (decision == 'y' || decision == 'Y')
+            if (decition == 'y' || decition == 'Y')
             {
-                int card = RamdomCard();
+                int card = RamdomCard(); // The player get another card
                 cout << "You got a card: " << card << endl;
                 total_player_2 += card;
-                cout << "New total: " << total_player_2 << endl;
+                cout << "New total: " << total_player_2 << endl; // New total cards for the player
 
                 if (total_player_2 >= 21)
                 {
@@ -226,6 +226,7 @@ void Play21Cpu()
     {
         cout << "CPU wins!" << endl;
     }
+
     SaveMatch21(player_1, playerTotal, "CPU", cpuTotal);
 }
 

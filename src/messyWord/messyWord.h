@@ -61,11 +61,74 @@ inline bool CpuGuessRight()
     return rand() % 2 == 0; // 0 o 1 → 50% probability
 }
 
+// function to save the match
+void SaveMessyWord(const string& player_1, int score1, const string& player_2, int score2)
+{
+    ofstream archivo("score_MessyWord.txt", ios::app);
+
+    if (archivo.is_open())
+    {
+        archivo << "Resultado de la partida:" << endl;
+        archivo << player_1 << ": " << score1 << endl;
+        archivo << player_2 << ": " << score2 << endl;
+        archivo << "-------------------------" << endl;
+        archivo.close();
+        cout << "Scores save in score_MessyWord.txt\n";
+    }
+    else
+    {
+        cout << " Error in save progress." << endl;
+    }
+}
+
 void StopMessyWord()
 {
     cout << "\nPress ENTER to continue...";
     cin.ignore();
     cin.get(); // Waits for the user to pres ENTER
+}
+
+void StopMessyWord();
+
+inline void ShowSavedScores()
+{
+    ifstream file("score_MessyWord.txt");
+
+    cout << "\n================= MATCH HISTORY =================\n";
+
+    if (file.is_open())
+    {
+        string line;
+        while (getline(file, line))
+        {
+            cout << line << endl;
+        }
+        file.close();
+    }
+    else
+    {
+        cout << "Could not open the score file or it doesn't exist yet.\n";
+    }
+
+    cout << "=================================================\n";
+    StopMessyWord(); // Pause until the user presses ENTER
+}
+
+inline void ResetMessyWordScores()
+{
+    ofstream file("score_MessyWord.txt",ios::trunc); // Truncate borra todo
+
+    if (file.is_open())
+    {
+        file.close();
+        cout << "\nAll match records have been deleted successfully.\n";
+    }
+    else
+    {
+        cout << "\nError: could not open score file to delete contents.\n";
+    }
+
+    StopMessyWord(); // Espera ENTER
 }
 
 // One player mode: player vs CPU
@@ -125,6 +188,7 @@ inline void OnePlayerMode()
     {
         cout <<"\n--------------------- [TIE] ---------------------\n";
     }
+    SaveMessyWord(player_1, player_points, "CPU", cpu_points);
     StopMessyWord();
 }
 
@@ -190,37 +254,22 @@ inline void TwoPlayerMode()
     {
         cout <<"\n--------------------- [TIE] ---------------------\n";
     }
+    SaveMessyWord(player_1, points_1, player_2, points_2);
     StopMessyWord();
 }
 
 inline void GameRules(){
     {
-    cout << "\n=================================================\n";
-    cout << "                MESSY WORD GAME RULES            \n";
-    cout << "=================================================\n";
-    cout << "OBJECTIVE:\n";
-    cout << "- Guess scrambled words over several rounds.\n";
-    cout << "- The player with the most correct guesses wins.\n\n";
-    
-    cout << "GAME MODES:\n";
-    cout << "1) One Player Mode (1 vs CPU)\n";
-    cout << "   - 5 rounds.\n";
-    cout << "   - Player guesses the scrambled word.\n";
-    cout << "   - CPU guesses randomly with 50% chance of being correct.\n";
-    cout << "2) Two Player Mode (1 vs 1)\n";
-    cout << "   - 3 rounds.\n";
-    cout << "   - Each player gets a scrambled word and guesses.\n\n";
-    
-    cout << "SCORING SYSTEM:\n";
-    cout << "- +1 point per correct word guessed.\n";
-    cout << "- The player with the most points wins.\n\n";
-    
-    cout << "TIEBREAKERS:\n";
-    cout << "- If both players have the same score, the game ends in a tie.\n\n";
-    
-    cout << "CPU RULES:\n";
-    cout << "- CPU guesses each word with a 50% chance of correctness.\n";
-    cout << "=================================================\n";
+    cout << "========= RULES OF THE GAME =========\n";
+    cout << "The rules of the Messy Word game are as follows:\n";
+    cout << "- The objective is to guess scrambled words over several rounds.\n";
+    cout << "- The player with the most correct guesses wins the game.\n";
+    cout << "- Game Modes:\n";
+    cout << "  * One Player: 5 rounds against the CPU. CPU has a 50% chance to guess correctly.\n";
+    cout << "  * Two Players: 3 rounds. Each player guesses their own scrambled word.\n";
+    cout << "- Each correct guess earns 1 point.\n";
+    cout << "- If scores are tied, the game ends in a tie.\n";
+    cout << "====================================\n";
     Stop();
 }
 }
