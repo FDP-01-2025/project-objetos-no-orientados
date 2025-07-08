@@ -185,6 +185,7 @@ void MessyWordMenu()
             break;
         case 4:
             cout << "Load Game\n";
+            ShowSavedScores();
             break;
         case 5:
             cout << "Game Rules\n";

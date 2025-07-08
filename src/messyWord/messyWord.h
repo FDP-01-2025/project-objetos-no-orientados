@@ -62,7 +62,7 @@ inline bool CpuGuessRight()
 }
 
 // function to save the match
-void SaveMaessyWord(const string& player_1, int score1, const string& player_2, int score2)
+void SaveMessyWord(const string& player_1, int score1, const string& player_2, int score2)
 {
     ofstream archivo("score_MessyWord.txt", ios::app);
 
@@ -86,6 +86,32 @@ void StopMessyWord()
     cout << "\nPress ENTER to continue...";
     cin.ignore();
     cin.get(); // Waits for the user to pres ENTER
+}
+
+void StopMessyWord();
+
+inline void ShowSavedScores()
+{
+    ifstream file("score_MessyWord.txt");
+
+    cout << "\n=============== MATCH HISTORY ===============\n";
+
+    if (file.is_open())
+    {
+        string line;
+        while (getline(file, line))
+        {
+            cout << line << endl;
+        }
+        file.close();
+    }
+    else
+    {
+        cout << "Could not open the score file or it doesn't exist yet.\n";
+    }
+
+    cout << "=============================================\n";
+    StopMessyWord(); // Pause until the user presses ENTER
 }
 
 // One player mode: player vs CPU
@@ -145,7 +171,7 @@ inline void OnePlayerMode()
     {
         cout <<"\n--------------------- [TIE] ---------------------\n";
     }
-    SaveMatch21(player_1, player_points, "CPU", cpu_points);
+    SaveMessyWord(player_1, player_points, "CPU", cpu_points);
     StopMessyWord();
 }
 
@@ -211,7 +237,7 @@ inline void TwoPlayerMode()
     {
         cout <<"\n--------------------- [TIE] ---------------------\n";
     }
-    SaveMatch21(player_1, points_1, player_2, points_2);
+    SaveMessyWord(player_1, points_1, player_2, points_2);
     StopMessyWord();
 }
 
